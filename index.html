@@ -125,7 +125,7 @@
       </div>
       <br><br>
       <div class="break">
-        That being said, I have 14yrs of design experience that has pivoted from a strict graphic design career with a focus on print and branding into User Interface design along with a top-to-bottom Development background. Working on everything from the tedious but necessary backend architecture and admin planning to what I would consider my true love of Front-End web development that uses any platform or framework that best fits the project &amp;clients needs. This has given me multiple perspectives on how to achieve not only my goals of building solid forward thinking designs that PEOPLE will enjoy using. These projects aim to provide organized takes on complicated sets of information important to the client’s success. I have worked in non-standard company cultures like start-up, agencies, remote and corporate enterprise sized teams.
+        That being said, I have 14yrs of design experience that has pivoted from a strict graphic design career with a focus on print and branding into User Interface design along with a top-to-bottom Development background. Working on everything from the tedious but necessary backend architecture and admin planning to what I would consider my true love of Front-End web development that uses any platform or framework that best fits the project &amp; clients needs. This has given me multiple perspectives on how to achieve not only my goals of building solid forward thinking designs that PEOPLE will enjoy using. These projects aim to provide organized takes on complicated sets of information important to the client’s success. I have worked in non-standard company cultures like start-up, agencies, remote and corporate enterprise sized teams.
       </div>
       <br><br>
       <div class="break">
@@ -438,7 +438,7 @@
     <footer class="hidelrg"><p>&copy; JOEL<strong>DOMBEK</strong> 2017</p></footer>
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://raw.githubusercontent.com/darcyclarke/Detect.js/master/detect.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.3.6/mobile-detect.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
     <!-- Google Analytics-->
     <script>
@@ -482,9 +482,102 @@
       }(window.jQuery, window.inActiveTab));
     </script>
     <script>
-      //document.getElementById("version").innerHTML = navigator.appVersion;
-      document.getElementById("version").innerHTML = navigator.platform;
-      //document.getElementById("version").innerHTML = navigator.userAgent;
+      navigator.browserInfo =
+      (
+        function()
+        {
+            var browser = '';
+            var version = '';
+            var idString = '';
+
+            var ua = navigator.userAgent;
+            var tem = [];
+            var M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i);
+
+            //IE will be identified as 'Trident' and a different version number. The name must be corrected to 'Internet Explorer' and the correct version identified.
+            //ie correction
+            if(/trident/i.test(M[1]))
+            {
+                tem = /\brv[ :]+(\d+.?\d*)/g.exec(ua) || [];
+                browser = 'Internet Explorer';
+                version = tem[1];
+            }
+
+            //firefox
+            else if(/firefox/i.test(M[1]))
+            {
+                tem = /\brv[ :]+(\d+.?\d*)/g.exec(ua) || [];
+                browser = 'Firefox';
+                version = tem[1];
+            }
+
+            //safari
+            else if(/safari/i.test(M[1]))
+            {
+                tem = ua.match(/\bVersion\/(\d+.?\d*\s*\w+)/);
+                browser = 'Safari';
+                version = tem[1];
+            }
+
+            //If 'Chrome' is found, it may be another browser.
+            else if(M[1] === 'Chrome')
+            {
+                //opera
+                var temOpr = ua.match(/\b(OPR)\/(\d+.?\d*.?\d*.?\d*)/);
+                //edge
+                var temEdge = ua.match(/\b(Edge)\/(\d+.?\d*)/);
+                //chrome
+                var temChrome = ua.match(/\b(Chrome)\/(\d+.?\d*.?\d*.?\d*)/);
+
+                //a genuine 'Chrome' reading will result from ONLY temChrome not being null.
+                var genuineChrome = temOpr == null && temEdge == null && temChrome != null;
+
+                if(temOpr != null)
+                {
+                    browser = temOpr[1].replace('OPR', 'Opera');
+                    version = temOpr[2];
+                }
+
+                if(temEdge != null)
+                {
+                    browser = temEdge[1];
+                    version = temEdge[2];
+                }
+
+                if(genuineChrome)
+                {
+                    browser = temChrome[1];
+                    version = temChrome[2];
+                }
+            }
+            //There will be some odd balls, so if you wish to support those browsers, add functionality to display those browsers as well.
+
+            if(browser == '' || version == '')
+            {
+                idString = 'We couldn\'t find your browser, but you can still use the site';
+            }
+            else
+            {
+                idString = browser + ' version ' + version;
+            }
+
+            //alert('Your browser is ' + idString);
+            document.getElementById("version").innerHTML = ('Your browser is ' + idString);
+
+            //store the type of browser locally
+            if(typeof(Storage) !== "undefined")
+            {
+                //Store
+                localStorage.setItem('browser', browser);
+                localStorage.setItem('version', version);
+            }
+            else
+            {
+                alert('local storage not available');
+                document.getElementById("version").innerHTML = ('local storage not available');
+            }
+        }
+      )();
     </script>
   </body>
 </hmtl>
