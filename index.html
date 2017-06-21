@@ -76,14 +76,15 @@
         padding: 2.5em 1.5em;
         font-family: Helvetica, Arial, sans-serif;
       }
-      a.anchor {display: block;position: relative;visibility: hidden;height: 0;}
       header{background-color: white;color: #1a3acc;}
       #body{background-color: #1a3acc; color: white;font-size: 1em; padding: 0 1.5em;}
       .break{
         max-width: 700px;
         word-wrap: break-word;
       }
-      a:link,a:visited{color: white;}
+      a:link,a:visited{color: white;cursor:pointer;}
+      a.anchor {display: block;position: relative;visibility: hidden;height: 0;}
+      a.back-to-top{z-index: 100;cursor:pointer;position: relative;}
       p{padding: 0;margin: 0;}
       ul{margin: 0;padding-left: 0px}
       ul.dash{list-style-type: none;}
@@ -114,12 +115,11 @@
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <!-- <a class="over" href="mailto:dombekj890@gmail.com?Subject=Hello%20there!%20%20|%20%20Your%20Subject%20Here" target="_top" style="">&nbsp;</a> -->
+    <a class="over" href="mailto:dombekj890@gmail.com?Subject=Hello%20there!%20%20|%20%20Your%20Subject%20Here" target="_top" style="">&nbsp;</a>
     <a class="anchor" id="header"></a>
     <div class="info" style="position:fixed;display:block;width:100%;padding:2px 20px 2px 20px;left:0;right:0;background-color:white;box-sizing: border-box;z-index:98;color:#1a3acc;">
-      <span style="text-align:left;" id="version"></span> &nbsp;&nbsp;|&nbsp;&nbsp;
-      <span style="text-align:left;" id="address"></span>
-      <span style="text-align:right;float:right;">Viewport Width: <span id="monitor"></span>px</span>
+      <span style="text-align:left;" id="version"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span style="text-align:left;" id="address"></span>
+      <span style="text-align:right;float:right;">Viewport:&nbsp;<span id="monitor"></span>px</span>
     </div>
     <header class="hidelrg"><span style="text-align:left;display:block;width:50%;float:left;"><br class="hidelrg">JOEL<strong>DOMBEK</strong>&nbsp;&nbsp;|&nbsp;&nbsp;RESUME</span> <br class="hidelrg"><small style="text-align:right;display:block;width:50%;float:right;">ver 1.1.9</small></header>
     <div id="body">
@@ -139,9 +139,9 @@
         <br>
         <br>
       </div>
-      <br>
+      <br class="hide">
       <div class="break">
-        Hello, below you will find my resume which has a detailed breakdown of 7+yrs(of 14) relevant work experience as well as a list of languages and applications I have __experience__ using at the various jobs listed as well as platforms and services used for freelance or on the job.
+        Hello, below you will find my resume which has a detailed breakdown of 7+yrs(of 14) relevant work experience as well as a list of languages and applications I have used at the various jobs listed as well as platforms and services used for freelance or on the job.
       </div>
       <br><br>
       <div class="break">
@@ -154,6 +154,10 @@
       <br><br>
       <div class="break">
         Being able to understand the execution, this allows me to plan __better__with respects to feasible concepts while still attempting to move the needle. My top-to-bottom / concept-to-launch experience that encompasses giving a brand a look and voice to post-launch feature iteration makes me a valuable resource on creative projects I can not only concept and created the needed assets but build the product or experience that goes around it.
+      </div>
+      <br><br>
+      <div class="break">
+        More recently, I've been working in the Email and Digital Marketing arm of Dick's Sporting Goods since August of 2015 where I've been the digital execution stratigest for the Outdoor '16 and '17 campaigns. I've also re-wrote our codebase for emails addressing app/client nuances affecting the way our email were dsiplayed. In tandem with this I've trained other designers on HTML and development best practices and educated the concepts of "Mobile First" and Responsive Design philosophies. And now, with marketing channels being more connected internally, taking that to the next to proivide a more unified &amp; engaging customer experience I feel I would be a great fit for a UI/UX or Front-End Development position. My knowledge of the brand and it's child categories and how to execute and iterate and keep DSG at the top of the industry has me very excited for opprotunities such as this.
       </div>
       <br>
       <br>
@@ -438,12 +442,10 @@
       <!-- <br>
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>
       <br>
-      &nbsp;LINKS TO WORK<br>
+      &nbsp;EXAMPLES<br>
       <br>
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>
       <br> -->
-      <!-- >>>>>>>__MORE__<br> -->
-      <!-- >>>>>>>__ADD_TO_GITHUB__<br> -->
       <!-- http://joeldom.github.io/DSG/MJML/<br>
       http://joeldom.github.io/DSG/alt/v1/<br>
       http://joeldom.github.io/DSG/alt/outdoor/<br>
@@ -454,7 +456,6 @@
       http://joeldom.github.io/DSG//alt/bose/ua/index.html<br> -->
       <br>
       <br>
-      <!-- >>>>>>>__CLOSING__ -->
     </div>
     <footer class="hidelrg"><p>&copy; JOEL<strong>DOMBEK</strong> 2017</p></footer>
     <!-- Scripts -->
@@ -508,7 +509,7 @@
             if(/trident/i.test(M[1]))
             {
                 tem = /\brv[ :]+(\d+.?\d*)/g.exec(ua) || [];
-                browser = 'Internet Explorer';
+                browser = 'Internet&nbsp;Explorer';
                 version = tem[1];
             }
 
@@ -573,7 +574,7 @@
             }
 
             //alert('Your browser is ' + idString);
-            document.getElementById("version").innerHTML = ('Your browser is ' + idString);
+            document.getElementById("version").innerHTML = ('Browser:&nbsp;' + idString);
 
             //store the type of browser locally
             if(typeof(Storage) !== "undefined")
@@ -590,7 +591,9 @@
         }
       )();
     </script>
-    <script>function getIP(json) {document.getElementById("address").innerHTML = ("Your IP is:&nbsp;" + json.ip);}</script>
+    <script>function getIP(json) {document.getElementById("address").innerHTML = ("IP:&nbsp;" + json.ip);}</script>
     <script src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+    <!-- TRACKING PIX -->
+    <img src="https://ga-beacon.appspot.com/UA-XXXXX-X/welcome-page" />
   </body>
 </hmtl>
