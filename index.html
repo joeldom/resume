@@ -78,9 +78,14 @@
         max-width: 700px;
         word-wrap: break-word;
       }
+      .info{position:fixed;display:block;width:100%;padding:2px 20px 2px 20px;left:0;right:0;background-color:white;box-sizing: border-box;z-index:98;color:#1a3acc;}
       a:link,a:visited{color: white;cursor:pointer;}
       a.anchor {display: block;position: relative;visibility: hidden;height: 0;}
       a.back-to-top{z-index: 100;cursor:pointer;position: relative;}
+      button.print-btn{z-index: 100;cursor:pointer;position: relative;}
+      .btn{z-index:100;background:none;border:3px solid white;padding:2em 0;width:40%;margin:40px 0;display:inline-block;float:left;color:white;font-family: 'Roboto Mono', monospace;box-sizing: border-box;text-align: center;text-decoration: none;cursor:pointer;position: relative;font-size: 14px;text-transform: uppercase;box-sizing: border-box;}
+      .spacer{display: inline-block;position: relative;margin:0;padding:0;float: left;width: 10%;}
+      .clear{clear: both;}
       p{padding: 0;margin: 0;}
       ul{margin: 0;padding-left: 0px}
       ul.dash{list-style-type: none;}
@@ -104,13 +109,15 @@
         background-color: #212121;
         color: white;
       }
-      .hidelrg{visibility:hidden;display:none;}
+      .hidelrg,.logo{visibility:hidden;display:none;}
       @media screen and (max-width:600px){
         #body{background-color: #1a3acc; color: white;font-size: 12px; padding: 0 1.5em;}
         div[class=hidelrg],br[class=hidelrg],.hidelrg{display:block!important;visibility:visible!important;}
         a[class=hidelrg]{display:block!important;visibility:visible;text-align:center;width:auto!important;height:auto;}
         div[class=hide],.hide, .gmail, .inbox{display:none!important;}
         .info{font-size: 8px;}
+        .btn{width: 100%;margin: 20px 0;}
+        .spacer{display: none;visibility: hidden;}
       }
       @media yahoo {}
       .applelinks a,.appleBody a,.appleFooter a{color:#999999!important;text-decoration:none;outline:none;}
@@ -118,6 +125,10 @@
       @media print {
         #body{background-color: white; color: black;font-size: 9px;line-height: 1em;}
         .break{max-width: 700px;word-wrap: break-word;}
+        .btn{display: none;visibility: hidden;}
+        .info{color:black;padding:0;position: relative;font-size: 9px;}
+        .logo{display: block;visibility: visible;border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;
+          padding:0px!important;border:0!important;margin:0px auto;}
       }
     </style>
   </head>
@@ -127,11 +138,11 @@
     <![endif]-->
     <a class="over" href="mailto:me@joeldombek.com?subject=Hello%20there!%20%20|%20%20Your%20Subject%20Here&Body=Your%20Name%0D%0A%0D%0AYour%20message%20here..." target="_top" style="" title="////////////////////////////////////////////////////////////////// &#013;&#013; Send me an email with any interest you may have in working with, hiring or giving me feedback and saying HI! I am interested in hearing about interesting &amp; challenging projects my Design or Dev skills might be able to assit with.&#013;&#013; ~jd &#013;&#013; //////////////////////////////////////////////////////////////////">&nbsp;</a>
     <a class="anchor" id="header"></a>
-    <div class="info" style="position:fixed;display:block;width:100%;padding:2px 20px 2px 20px;left:0;right:0;background-color:white;box-sizing: border-box;z-index:98;color:#1a3acc;">
+    <div class="info">
       <span style="text-align:left;" id="version"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span style="text-align:left;" id="address"></span>
       <span style="text-align:right;float:right;">Viewport:&nbsp;<span id="monitor"></span>px</span>
     </div>
-    <header class="hidelrg"><span style="text-align:left;display:block;width:50%;float:left;"><br class="hidelrg">JOEL<strong>DOMBEK</strong>&nbsp;&nbsp;|&nbsp;&nbsp;RESUME</span> <br class="hidelrg"><small style="text-align:right;display:block;width:50%;float:right;">ver 1.1.9</small></header>
+    <header class="hidelrg"><span style="text-align:left;display:block;width:50%;float:left;"><br class="hidelrg">JOEL<strong>DOMBEK</strong>&nbsp;&nbsp;|&nbsp;&nbsp;RESUME</span> <br class="hidelrg"><small style="text-align:right;display:block;width:50%;float:right;">ver 1.2.6</small></header>
     <div id="body">
       <br><br class="hide"><br class="hidelrg">
       <div class="hide">
@@ -443,7 +454,12 @@
         <li>Involved with screen printing process.</li>
       </ul>
       <br><br><br><br><br>
-      <a class="back-to-top" href="#header" style="display:block;height:40px;">Back to top</a><br><br><br>
+      <button class="btn" style="z-index:110" onclick="myFunction()">Print this page</button>
+      <div class="spacer">
+        &nbsp;
+      </div>
+      <a class="btn" style="z-index:110" href="#header">Back to top</a>
+      <br class="clear"><br><br>
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br><br>
       <p class="break">I am genuinely passionate about creating visually striking
       interactions that organize content to help both users and clients.
@@ -453,6 +469,24 @@
       <br>
       ~jd
       <br>
+      <img src="jd-wht.png" alt="">
+      <!-- <table class="logo" width="102">
+        <tr>
+          <td width="50" height="50" bgcolor="none">&nbsp;</td>
+          <td width="2"></td>
+          <td width="50" height="50" bgcolor="black">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="50" height="50" bgcolor="black">&nbsp;</td>
+          <td width="2"></td>
+          <td width="50" height="50" bgcolor="black">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="50" height="50" bgcolor="black">&nbsp;</td>
+          <td width="2"></td>
+          <td width="50" height="50" bgcolor="black">&nbsp;</td>
+        </tr>
+      </table> -->
       <!-- <br>
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>
       <br>
@@ -474,6 +508,7 @@
     </div>
     <footer class="hidelrg"><p>&copy; JOEL<strong>DOMBEK</strong> 2017</p></footer>
     <!-- Scripts -->
+    <script>function myFunction() {window.print();}</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"><\/script>')</script>
     <!-- Google Analytics-->
