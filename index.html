@@ -110,7 +110,7 @@
         background-color: #212121;
         color: white;
       }
-      .hidelrg,.logo{visibility:hidden;display:none;}
+      .hidelrg,.logo,.print{visibility:hidden;display:none;}
       @media screen and (max-width:600px){
         #body{background-color: #1a3acc; color: white;font-size: 12px; padding: 0 1.5em;}
         div[class=hidelrg],br[class=hidelrg],.hidelrg{display:block!important;visibility:visible!important;}
@@ -118,7 +118,7 @@
         div[class=hide],.hide, .gmail, .inbox{display:none!important;}
         .info{font-size: 8px;}
         .btn{width: 100%;margin: 10px 0;}
-        .spacer{display: none;visibility: hidden;}
+        .spacer,.print{display: none;visibility: hidden;}
       }
       @media yahoo {}
       .applelinks a,.appleBody a,.appleFooter a{color:#999999!important;text-decoration:none;outline:none;}
@@ -130,6 +130,8 @@
         .info{color:black;padding:0;position: relative;font-size: 9px;}
         .logo{display: block;visibility: visible;border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;
           padding:0px!important;border:0!important;margin:0px auto;}
+        .print{display: block;visibility: visible;}
+        .screen{display: none;visibility: hidden;}
       }
     </style>
   </head>
@@ -462,7 +464,7 @@
         </div>
         <a class="btn" style="z-index:110" href="http://joeldom.github.io/redesign/" target="_top">Preview Site</a>
         <br class="clear">
-        <button class="btn" style="z-index:110" onclick="myFunction()">Print this page</button>
+        <button class="btn" style="z-index:110" onclick="myFunction()">PRINT PAGE</button>
         <div class="spacer">
           &nbsp;
         </div>
@@ -476,7 +478,7 @@
       or just backend content organization. I want to make something people
       enjoy looking at and clicking on ;)</p>
       <br>
-      <img src="jd-logo-gif-wht.gif" alt="">&nbsp;&nbsp;&nbsp;~jd
+      <span class="screen"><img src="jd-logo-gif-wht.gif" alt="">&nbsp;&nbsp;&nbsp;</span>~jd
       <br>
 
       <!-- <br>
@@ -496,7 +498,12 @@
       http://joeldom.github.io/DSG//alt/bose/ua/index.html<br> -->
       <br>
       <br>
-      <!-- <img src="jd-logo-reflex.gif" style="width:100%;height:auto;" alt="" /> -->
+      <div class="print">
+        <br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br>
+        I am not sure why you printed this, while I am proud of my print background, I do not condone the cutting down of trees for useless things. Perhaps you needed something to hang up in your boring cube, pass off to a superior, emergency TP in a pinch I am not sure, but hopfully emailed me and we can work together.
+      </div>
     </div>
     <footer class="hidelrg"><p>&copy; JOEL<strong>DOMBEK</strong> 2017</p></footer>
     <!-- Scripts -->
