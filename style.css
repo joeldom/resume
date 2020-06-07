@@ -6,11 +6,16 @@ html{padding:0;margin:0;-webkit-text-size-adjust:none;}
 * ::selection {background: #FFFFFF !important; color: #1a3acc;}
 html ::selection {background: #FFFFFF !important; color: #1a3acc;}
 body{
+  font-family: 'Source Sans Pro', sans-serif;
   font-family: 'Roboto Mono', monospace;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
   font-size: 13px;
   color: #FFF;
-  line-height: 1.125em;
-  font-weight: 500;
+  line-height: 1.5em;
+  /* letter-spacing: .042em; */
+  /* line-height: 1.125em; */
+  font-weight: 300;
   padding: 0; margin: 0;
   height: 100%;
 }
@@ -27,10 +32,41 @@ body{
 header,footer{
   display: block;
   padding: 2.5em 1.5em;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
+header strong{
+  font-weight: 800;
+}
+/* #1a3acc */
+@keyframes backgroundColorPalette{
+	0% {
+		background: #1a3acc;
+	}
+	25% {
+		background: #008080;
+	}
+	50% {
+		background: #602222;
+	}
+	75% {
+		background: #444;
+	}
+	100% {
+		background: #2D2828;
+	}
+}
+
 header{background-color: white;color: #1a3acc;}
-#body{background-color: #1a3acc; color: white;font-size: 1em; padding: 0 1.5em;}
+#body{
+  background-color: #444;
+  animation-name: backgroundColorPalette;
+	animation-duration: 10s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+  color: white;
+  font-size: 1em;
+  padding: 0 1.5em;
+}
 .break{
   max-width: 700px;
   word-wrap: break-word;
