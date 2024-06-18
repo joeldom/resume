@@ -107,7 +107,6 @@
             <!-- //////////////////////////////////////////////////////////////////<br /> -->
             <br /> &nbsp;JOEL
             <strong>DOMBEK</strong><br />
-            <strong>C:\</strong>&nbsp;<span data-target-resolver></span><span class="blink"></span>
             <!-- <br />
         &nbsp;ME@JOELDOMBEK.COM<br />
         &nbsp;WWW.JOELDOMBEK.COM<br />
@@ -683,27 +682,6 @@
     </script>
     <script src="script.js"></script>
     <script src="collapse.js"></script>
-    <script type="text/javascript">
-      if (document.addEventListener) {
-        // IE >= 9; other browsers
-        document.addEventListener(
-          "contextmenu",
-          function(e) {
-            alert(
-              "You've tried to open context menu by right clicking.\n\nI've disabled this to make it a smidge more difficult to see behind the scenes of the code and content I have spent a ton of time currating that defines my career here as well as to safegaurd my personal information.\n\n\nThere are others ways to see the source if you really need to ;}"
-            ); //here you draw your own menu
-            e.preventDefault();
-          },
-          false
-        );
-      } else {
-        // IE < 9
-        document.attachEvent("oncontextmenu", function() {
-          alert("You've tried to open context menu");
-          window.event.returnValue = false;
-        });
-      }
-    </script>
     <script>
       function getIP(json) {
         document.getElementById("address").innerHTML = "IP:&nbsp;" + json.ip;
