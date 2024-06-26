@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         svg.setAttribute('aria-hidden', 'true');
         svg.setAttribute('viewBox', '0 0 20 20');
         svg.setAttribute('class', 'svg-icon ' + direction + '-icon');
+        svg.setAttribute('style', 'display: inline;');
 
         var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         if (direction === 'collapsed') {
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Set initial link text based on initial state
         if (targetList.classList.contains('collapse')) {
-            link.firstChild.nodeValue = 'Show';
+            link.firstChild.nodeValue = 'Show Details';
         } else {
             link.firstChild.nodeValue = 'Hide';
             collapsedIcon.style.display = 'none';
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Update link text and icon based on the state
             if (targetList.classList.contains('collapse')) {
-                this.firstChild.nodeValue = 'Show';
+                this.firstChild.nodeValue = 'Show Details';
                 collapsedIcon.style.display = 'inline';
                 expandedIcon.style.display = 'none';
             } else {
@@ -75,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var collapsedIcon = link.querySelector('.collapsed-icon');
             var expandedIcon = link.querySelector('.expanded-icon');
             if (targetList.classList.contains('collapse')) {
-                link.firstChild.nodeValue = 'Show';
+                link.firstChild.nodeValue = 'Show Details';
                 collapsedIcon.style.display = 'inline';
                 expandedIcon.style.display = 'none';
             } else {
@@ -84,6 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 expandedIcon.style.display = 'inline';
             }
         });
-        this.firstChild.nodeValue = allCollapsed ? 'Hide All' : 'Show All';
+        this.firstChild.nodeValue = allCollapsed ? 'Hide Details' : 'Show Details';
     });
 });
