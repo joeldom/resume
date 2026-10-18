@@ -835,5 +835,56 @@
     <script src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
     <!-- TRACKING PIX -->
     <!-- <img src="https://ga-beacon.appspot.com/UA-XXXXX-X/welcome-page" /> -->
+  
+    <script>
+      (function () {
+        var body = document.body;
+        var picker = document.getElementById('theme-picker');
+        var trigger = document.getElementById('theme-picker-trigger');
+        var options = document.getElementById('theme-picker-options');
+        var swatches = Array.prototype.slice.call(document.querySelectorAll('[data-theme-choice]'));
+        var themes = ['paper', 'blue', 'dark-high', 'dark-low'];
+        var key = 'resume-v3-theme';
+        var saved = null;
+        try { saved = localStorage.getItem(key); } catch (e) {}
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var initial = themes.indexOf(saved) !== -1 ? saved : (prefersDark ? 'dark-low' : 'paper');
+
+        function applyTheme(theme) {
+          if (themes.indexOf(theme) === -1) return;
+          body.setAttribute('data-theme', theme);
+          try { localStorage.setItem(key, theme); } catch (e) {}
+          swatches.forEach(function (button) {
+            button.setAttribute('aria-pressed', String(button.getAttribute('data-theme-choice') === theme));
+          });
+        }
+        function closePicker() {
+          options.hidden = true;
+          trigger.setAttribute('aria-expanded', 'false');
+          picker.classList.remove('is-open');
+        }
+        trigger.addEventListener('click', function () {
+          var opening = options.hidden;
+          options.hidden = !opening;
+          trigger.setAttribute('aria-expanded', String(opening));
+          picker.classList.toggle('is-open', opening);
+        });
+        swatches.forEach(function (button) {
+          button.addEventListener('click', function (event) {
+            event.stopPropagation();
+            applyTheme(button.getAttribute('data-theme-choice'));
+            closePicker();
+          });
+        });
+        document.addEventListener('click', function (event) {
+          if (!picker.contains(event.target)) closePicker();
+        });
+        document.addEventListener('keydown', function (event) {
+          if (event.key === 'Escape') closePicker();
+        });
+        applyTheme(initial);
+      })();
+    </script>
+
   </body>
 </html>
