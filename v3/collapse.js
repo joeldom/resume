@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('d', direction === 'collapsed'
       ? 'M11.8 2.8L10.8 3.8 16.2 9.3 1 9.3 1 10.7 16.2 10.7 10.8 16.2 11.8 17.2 19 10z'
-      : 'M8.2 17.2L9.2 16.2 3.8 10.7 19 10.7 19 9.3 3.8 9.3 9.2 3.8 8.2 2.8 1 10z');
+      // Use a compact, filled X for the expanded / Hide Details state.
+      // Its stroke-like silhouette keeps the same visual weight as the arrow.
+      : 'M5.1 3.7L10 8.6 14.9 3.7 16.3 5.1 11.4 10 16.3 14.9 14.9 16.3 10 11.4 5.1 16.3 3.7 14.9 8.6 10 3.7 5.1z');
     svg.appendChild(path);
     return svg;
   }
