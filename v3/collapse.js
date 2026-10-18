@@ -29,6 +29,14 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!labelNode) {
       labelNode = document.createElement('span');
       labelNode.className = 'toggle-label';
+
+      // The original markup already contains a plain-text label.
+      // Remove direct text nodes before inserting the managed label span,
+      // otherwise "Show Details" remains beside the new span and appears twice.
+      Array.prototype.slice.call(link.childNodes).forEach(function (node) {
+        if (node.nodeType === 3) link.removeChild(node);
+      });
+
       link.insertBefore(labelNode, link.firstChild);
     }
     labelNode.textContent = label;
