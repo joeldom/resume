@@ -703,3 +703,36 @@ body.resume-v3 img { max-width: 100%; }
   body.resume-v3 *, body.resume-v3 .toggle-link, body.resume-v3 .see-more,
   body.resume-v3 #toggle-all-link { color: #0a0c0e !important; }
 }
+
+
+/* Theme surfaces: neutralize legacy blue/white panels so every theme stays coherent. */
+body.resume-v3 header,
+body.resume-v3 footer,
+body.resume-v3 .info,
+body.resume-v3 .upgrade,
+body.resume-v3 .upgrade p {
+  color: var(--theme-ink) !important;
+  background-color: var(--theme-bg) !important;
+  background-image: none;
+  border-color: var(--theme-rule);
+}
+body.resume-v3 #body {
+  color: var(--theme-ink) !important;
+  background-color: transparent !important;
+}
+body.resume-v3 .btn {
+  color: var(--theme-ink) !important;
+  border-color: var(--theme-rule) !important;
+  background-color: transparent !important;
+}
+body.resume-v3 .btn:hover {
+  color: var(--theme-bg) !important;
+  background-color: var(--theme-ink) !important;
+}
+body.resume-v3 .info {
+  position: static;
+  width: auto;
+}
+body.resume-v3 .upgrade p {
+  border-color: var(--theme-rule);
+}
