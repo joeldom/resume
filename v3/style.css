@@ -736,3 +736,20 @@ body.resume-v3 .info {
 body.resume-v3 .upgrade p {
   border-color: var(--theme-rule);
 }
+
+
+/* Keep each preview swatch true to its own palette, regardless of active page theme. */
+body.resume-v3 .swatch-paper,
+body.resume-v3 .swatch-paper b,
+body.resume-v3 .swatch-paper i { color: var(--black) !important; background-color: var(--white); }
+body.resume-v3 .swatch-blue,
+body.resume-v3 .swatch-blue b,
+body.resume-v3 .swatch-blue i { color: var(--white) !important; background-color: var(--brand-blue); }
+body.resume-v3 .swatch-dark-high,
+body.resume-v3 .swatch-dark-high b,
+body.resume-v3 .swatch-dark-high i { color: #fff !important; background-color: #000; }
+body.resume-v3 .swatch-dark-low,
+body.resume-v3 .swatch-dark-low b,
+body.resume-v3 .swatch-dark-low i { color: var(--base-bright) !important; background-color: var(--euphoria); }
+body.resume-v3 .toggle-link .svg-icon path,
+body.resume-v3 .svg-icon path { fill: currentColor; }
