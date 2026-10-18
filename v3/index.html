@@ -847,7 +847,10 @@
         var key = 'resume-v3-theme';
         var idleTimer = null;
         var scrollTimer = null;
-        var hasInteracted = false;
+        var isPointerOver = false;
+        var isScrolling = false;
+        var hasBeenHovered = false;
+        var idleDelay = 4000;
         var saved = null;
         try { saved = localStorage.getItem(key); } catch (e) {}
         var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -866,60 +869,94 @@
           trigger.setAttribute('aria-expanded', 'false');
           picker.classList.remove('is-open');
         }
-        function resetIdleTimer() {
+        function clearIdleTimer() {
           window.clearTimeout(idleTimer);
-          picker.classList.remove('is-idle', 'is-hidden');
-          if (picker.classList.contains('is-open') || document.activeElement === trigger || picker.contains(document.activeElement)) return;
-          idleTimer = window.setTimeout(function () {
-            if (!picker.classList.contains('is-open') && !picker.contains(document.activeElement)) {
-              picker.classList.add('is-idle');
-            }
-          }, 4000);
+          idleTimer = null;
         }
-        function revealOnInteraction() {
-          hasInteracted = true;
-          resetIdleTimer();
+        function scheduleIdle() {
+          clearIdleTimer();
+          if (isScrolling || isPointerOver || picker.classList.contains('is-open') ||
+              picker.contains(document.activeElement)) return;
+          idleTimer = window.setTimeout(function () {
+            if (isScrolling || isPointerOver || picker.classList.contains('is-open') ||
+                picker.contains(document.activeElement)) return;
+            if (hasBeenHovered) {
+              picker.classList.remove('is-hidden');
+              picker.classList.add('is-idle');
+            } else {
+              picker.classList.remove('is-idle');
+              picker.classList.add('is-hidden');
+            }
+          }, idleDelay);
+        }
+        function revealFromHover() {
+          hasBeenHovered = true;
+          picker.classList.remove('is-hidden', 'is-idle');
+          scheduleIdle();
         }
         trigger.addEventListener('click', function () {
-          revealOnInteraction();
+          picker.classList.remove('is-hidden', 'is-idle');
           var opening = options.hidden;
           options.hidden = !opening;
           trigger.setAttribute('aria-expanded', String(opening));
           picker.classList.toggle('is-open', opening);
+          if (opening) clearIdleTimer();
+          else scheduleIdle();
         });
         swatches.forEach(function (button) {
           button.addEventListener('click', function (event) {
             event.stopPropagation();
             applyTheme(button.getAttribute('data-theme-choice'));
             closePicker();
-            resetIdleTimer();
+            scheduleIdle();
           });
         });
-        picker.addEventListener('mouseenter', resetIdleTimer);
+        picker.addEventListener('mouseenter', function () {
+          isPointerOver = true;
+          revealFromHover();
+        });
+        picker.addEventListener('mouseleave', function () {
+          isPointerOver = false;
+          scheduleIdle();
+        });
         picker.addEventListener('focusin', function () {
-          window.clearTimeout(idleTimer);
-          picker.classList.remove('is-idle', 'is-hidden');
+          clearIdleTimer();
+          picker.classList.remove('is-hidden', 'is-idle');
         });
         picker.addEventListener('focusout', function () {
-          window.setTimeout(resetIdleTimer, 0);
+          window.setTimeout(scheduleIdle, 0);
         });
         window.addEventListener('scroll', function () {
+          isScrolling = true;
           picker.classList.add('is-hidden');
-          window.clearTimeout(idleTimer);
+          picker.classList.remove('is-idle');
+          clearIdleTimer();
           window.clearTimeout(scrollTimer);
           scrollTimer = window.setTimeout(function () {
-            picker.classList.remove('is-hidden');
-            resetIdleTimer();
-          }, 180);
+            isScrolling = false;
+            // Stay hidden while scrolling settles; then return to the dim state
+            // if already hovered once, otherwise stay hidden until first hover.
+            if (hasBeenHovered) {
+              picker.classList.remove('is-hidden');
+              picker.classList.add('is-idle');
+            } else {
+              picker.classList.add('is-hidden');
+            }
+            scheduleIdle();
+          }, 700);
         }, { passive: true });
         document.addEventListener('click', function (event) {
           if (!picker.contains(event.target)) closePicker();
         });
         document.addEventListener('keydown', function (event) {
-          if (event.key === 'Escape') closePicker();
+          if (event.key === 'Escape') {
+            closePicker();
+            scheduleIdle();
+          }
         });
         applyTheme(initial);
-        resetIdleTimer();
+        // Show on initial load, then hide if untouched after four seconds.
+        scheduleIdle();
       })();
     </script>
 
