@@ -777,3 +777,25 @@ body.resume-v3 .swatch-dark-low b,
 body.resume-v3 .swatch-dark-low i { color: var(--base-bright) !important; background-color: var(--euphoria); }
 body.resume-v3 .toggle-link .svg-icon path,
 body.resume-v3 .svg-icon path { fill: currentColor; }
+
+
+/* Stable idle behavior: after first hover, fade to dim; untouched controls hide. */
+.theme-picker.is-idle {
+  opacity: .12;
+  pointer-events: auto;
+}
+.theme-picker.is-hidden {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+.theme-picker.is-open,
+.theme-picker:focus-within,
+.theme-picker.is-scrolling {
+  opacity: 1;
+  transform: translateY(0);
+}
+.theme-picker.is-open .theme-swatch {
+  opacity: 1;
+  transform: scale(1);
+}
