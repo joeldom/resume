@@ -643,10 +643,12 @@ body.resume-v3 img { max-width: 100%; }
 .theme-picker.is-idle {
   opacity: .12;
 }
+/* Hide visually without disabling hover detection or shifting the hit area.
+   The fixed picker stays mounted and interactive so pointer entry can reveal it. */
 .theme-picker.is-hidden {
   opacity: 0;
-  transform: translateY(-8px);
-  pointer-events: none;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 .theme-picker.is-open,
 .theme-picker:focus-within,
@@ -784,10 +786,12 @@ body.resume-v3 .svg-icon path { fill: currentColor; }
   opacity: .12;
   pointer-events: auto;
 }
+/* Hide visually without disabling hover detection or shifting the hit area.
+   The fixed picker stays mounted and interactive so pointer entry can reveal it. */
 .theme-picker.is-hidden {
   opacity: 0;
-  transform: translateY(-8px);
-  pointer-events: none;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 .theme-picker.is-open,
 .theme-picker:focus-within,
