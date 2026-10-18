@@ -845,6 +845,9 @@
         var swatches = Array.prototype.slice.call(document.querySelectorAll('[data-theme-choice]'));
         var themes = ['paper', 'blue', 'dark-high', 'dark-low'];
         var key = 'resume-v3-theme';
+        var idleTimer = null;
+        var scrollTimer = null;
+        var hasInteracted = false;
         var saved = null;
         try { saved = localStorage.getItem(key); } catch (e) {}
         var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -863,7 +866,22 @@
           trigger.setAttribute('aria-expanded', 'false');
           picker.classList.remove('is-open');
         }
+        function resetIdleTimer() {
+          window.clearTimeout(idleTimer);
+          picker.classList.remove('is-idle', 'is-hidden');
+          if (picker.classList.contains('is-open') || document.activeElement === trigger || picker.contains(document.activeElement)) return;
+          idleTimer = window.setTimeout(function () {
+            if (!picker.classList.contains('is-open') && !picker.contains(document.activeElement)) {
+              picker.classList.add('is-idle');
+            }
+          }, 4000);
+        }
+        function revealOnInteraction() {
+          hasInteracted = true;
+          resetIdleTimer();
+        }
         trigger.addEventListener('click', function () {
+          revealOnInteraction();
           var opening = options.hidden;
           options.hidden = !opening;
           trigger.setAttribute('aria-expanded', String(opening));
@@ -874,8 +892,26 @@
             event.stopPropagation();
             applyTheme(button.getAttribute('data-theme-choice'));
             closePicker();
+            resetIdleTimer();
           });
         });
+        picker.addEventListener('mouseenter', resetIdleTimer);
+        picker.addEventListener('focusin', function () {
+          window.clearTimeout(idleTimer);
+          picker.classList.remove('is-idle', 'is-hidden');
+        });
+        picker.addEventListener('focusout', function () {
+          window.setTimeout(resetIdleTimer, 0);
+        });
+        window.addEventListener('scroll', function () {
+          picker.classList.add('is-hidden');
+          window.clearTimeout(idleTimer);
+          window.clearTimeout(scrollTimer);
+          scrollTimer = window.setTimeout(function () {
+            picker.classList.remove('is-hidden');
+            resetIdleTimer();
+          }, 180);
+        }, { passive: true });
         document.addEventListener('click', function (event) {
           if (!picker.contains(event.target)) closePicker();
         });
@@ -883,6 +919,7 @@
           if (event.key === 'Escape') closePicker();
         });
         applyTheme(initial);
+        resetIdleTimer();
       })();
     </script>
 
