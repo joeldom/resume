@@ -892,10 +892,14 @@ body.resume-v3 img {
 }
 
 @media print {
+    /* Hide decorative screen-only bars/cursors in printed output. */
+    .blink,
+    .over,
     .screen-only,
     .theme-picker,
     .v3-topbar {
         display: none !important;
+        visibility: hidden !important;
     }
     body.resume-v3 {
         color: #0a0c0e !important;
