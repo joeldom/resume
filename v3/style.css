@@ -892,6 +892,8 @@ body.resume-v3 img {
 }
 
 @media print {
+    /* Keep the informational strip on screen only. */
+    .info,
     /* Hide decorative screen-only bars/cursors in printed output. */
     .blink,
     .over,
