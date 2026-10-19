@@ -674,13 +674,30 @@
     </script>
     <script>
       (function() {
-        function setResumeTitle() {
-          var now = new Date();
-          var timestamp = now.toLocaleDateString("en-US") + " " +
-            now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
-          document.title = "Joel Dombek - Resume [" + timestamp + "]";
-        }
-        setResumeTitle();
+        var message = "No! Don't leave! I have such sights to show you.";
+        var now = new Date();
+        var timestamp = now.toLocaleDateString("en-US") + " " +
+          now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+        var resumeTitle = "Joel Dombek - Resume [" + timestamp + "]";
+
+        document.title = resumeTitle;
+
+        window.addEventListener("blur", function() {
+          document.title = message;
+        });
+
+        window.addEventListener("focus", function() {
+          document.title = resumeTitle;
+        });
+
+        // Keep the playful away title on screen, but never use it for printing.
+        window.addEventListener("beforeprint", function() {
+          document.title = resumeTitle;
+        });
+
+        window.addEventListener("afterprint", function() {
+          document.title = document.hasFocus() ? resumeTitle : message;
+        });
       })();
     </script>
     <script>
