@@ -591,6 +591,18 @@ body.resume-v3[data-theme="dark-low"] {
     background-color: var(--theme-bg) !important;
 }
 
+/* Show only the logo variant matching the active resume theme. */
+body.resume-v3 .theme-logo {
+    display: none;
+}
+
+body.resume-v3[data-theme="paper"] .theme-logo--paper,
+body.resume-v3[data-theme="blue"] .theme-logo--blue,
+body.resume-v3[data-theme="dark-high"] .theme-logo--dark-high,
+body.resume-v3[data-theme="dark-low"] .theme-logo--dark-low {
+    display: inline-block;
+}
+
 
 /* Override legacy hard-coded colors, including the expandable details controls. */
 
