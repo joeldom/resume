@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Joel Dombek — Resume v3</title>
+    <title>Joel Dombek - Resume</title>
     <meta name="description" content="The resume of Joel Dombek, a multi-disciplinary designer / developer and brand specialist with a focus on user interaction and design." />
     <meta name="keywords" content="HTML,CSS,XML,JavaScript" />
     <meta name="author" content="Joel Dombek" />
@@ -673,25 +673,15 @@
       });
     </script>
     <script>
-      (function($, inActiveTab, undefined) {
-        $(function() {
-          var message = "No! Don't leave! I have such sights to show you.";
-          var original;
-          $(window)
-            .focus(function() {
-              if (original) {
-                document.title = original;
-              }
-            })
-            .blur(function() {
-              var title = $("title").text();
-              if (title != message) {
-                original = title;
-              }
-              document.title = message;
-            });
-        });
-      })(window.jQuery, window.inActiveTab);
+      (function() {
+        function setResumeTitle() {
+          var now = new Date();
+          var timestamp = now.toLocaleDateString("en-US") + " " +
+            now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+          document.title = "Joel Dombek - Resume [" + timestamp + "]";
+        }
+        setResumeTitle();
+      })();
     </script>
     <script>
       navigator.browserInfo = (function() {
