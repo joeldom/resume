@@ -227,3 +227,130 @@ resolver.resolve(options, callback);
 // }
 
 // Resume v3 theme picker lives in index.html; existing animation behavior retained.
+
+
+// ============================================================================
+// CHANGE: Aphex Twin-inspired browser status readout.
+// Adds lightweight, client-side telemetry after the existing browser/IP line.
+// Existing resolver animation and resume interactions above remain untouched.
+// NOTE: IP is still supplied by the existing index.html/ipify callback;
+// referrer may be blank when the browser suppresses it or the visit is direct.
+// FPS is intentionally a visual, pseudo counter—not a performance benchmark.
+// ============================================================================
+
+(function initBrowserStatusReadout() {
+    // CHANGE: Guard against duplicate injection if this script is evaluated twice.
+    if (document.getElementById("browser-status-readout")) return;
+
+    var infoBar = document.querySelector(".info");
+    var address = document.getElementById("address");
+    if (!infoBar || !address) return;
+
+    // CHANGE: Insert status details directly after the existing IP field.
+    var readout = document.createElement("span");
+    readout.id = "browser-status-readout";
+    readout.setAttribute("aria-label", "Live browser status");
+    readout.style.cssText = [
+        "display:inline-block",
+        "margin-left:8px",
+        "font-family:'Roboto Mono',monospace",
+        "font-size:inherit",
+        "line-height:1.5",
+        "overflow-wrap:anywhere"
+    ].join(";");
+    address.insertAdjacentElement("afterend", readout);
+
+    var mouseX = "--";
+    var mouseY = "--";
+    var fps = 60;
+    var fpsTimer = null;
+    var scrollAnimation = null;
+    var lastTopState = window.scrollY <= 2;
+
+    // CHANGE: Show the source hostname when available, without exposing query strings.
+    function getReferrerLabel() {
+        if (!document.referrer) return "direct / hidden";
+        try {
+            var ref = new URL(document.referrer);
+            var host = ref.hostname.replace(/^www\./i, "");
+            var searchEngines = {
+                "google.com": "Google",
+                "bing.com": "Bing",
+                "duckduckgo.com": "DuckDuckGo",
+                "search.yahoo.com": "Yahoo",
+                "ecosia.org": "Ecosia",
+                "yandex.com": "Yandex"
+            };
+            var matched = Object.keys(searchEngines).filter(function (domain) {
+                return host === domain || host.slice(-(domain.length + 1)) === "." + domain;
+            })[0];
+            return matched ? searchEngines[matched] : host;
+        } catch (error) {
+            return "referrer unavailable";
+        }
+    }
+
+    var referrerLabel = getReferrerLabel();
+
+    function renderReadout() {
+        // CHANGE: Live viewport-relative mouse coordinates update only on pointer movement.
+        readout.textContent =
+            " | XY: " + mouseX + "," + mouseY +
+            " | FROM: " + referrerLabel +
+            " | FPS: " + fps;
+    }
+
+    window.addEventListener("mousemove", function (event) {
+        mouseX = Math.round(event.clientX);
+        mouseY = Math.round(event.clientY);
+        renderReadout();
+    }, { passive: true });
+
+    window.addEventListener("mouseout", function (event) {
+        if (!event.relatedTarget && !event.toElement) {
+            mouseX = "--";
+            mouseY = "--";
+            renderReadout();
+        }
+    }, { passive: true });
+
+    // CHANGE: Pseudo FPS drifts between 59 and 60 every eight seconds.
+    function startIdleFpsDrift() {
+        window.clearInterval(fpsTimer);
+        fpsTimer = window.setInterval(function () {
+            fps = fps === 60 ? 59 : 60;
+            renderReadout();
+        }, 8000);
+    }
+
+    // CHANGE: On reaching the very top, count the decorative FPS display from 50 to 60.
+    function countUpAtTop() {
+        window.clearInterval(fpsTimer);
+        window.clearInterval(scrollAnimation);
+        var value = 50;
+        fps = value;
+        renderReadout();
+        scrollAnimation = window.setInterval(function () {
+            value += 1;
+            fps = Math.min(value, 60);
+            renderReadout();
+            if (value >= 60) {
+                window.clearInterval(scrollAnimation);
+                scrollAnimation = null;
+                startIdleFpsDrift();
+            }
+        }, 100);
+    }
+
+    window.addEventListener("scroll", function () {
+        var atTop = window.scrollY <= 2;
+        if (atTop && !lastTopState) countUpAtTop();
+        lastTopState = atTop;
+    }, { passive: true });
+
+    // CHANGE: Keep the status line current when the viewport is resized.
+    window.addEventListener("resize", renderReadout, { passive: true });
+
+    renderReadout();
+    startIdleFpsDrift();
+})();
