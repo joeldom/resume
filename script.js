@@ -225,3 +225,5 @@ resolver.resolve(options, callback);
 //             "color:white !important;background-color:#1A3ACC !important;"
 //         );
 // }
+
+// Resume v3 theme picker lives in index.html; existing animation behavior retained.

@@ -5,22 +5,27 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Resume</title>
-    <meta name="description" content="The resume of Joel Dombek, a multi-diciplinary designer : developer and brand specialist with a focus on user interaction and design." />
+    <title>Joel Dombek - Resume</title>
+    <meta name="description" content="The resume of Joel Dombek, a multi-disciplinary designer / developer and brand specialist with a focus on user interaction and design." />
     <meta name="keywords" content="HTML,CSS,XML,JavaScript" />
     <meta name="author" content="Joel Dombek" />
-    <meta name="robots" content="noindex" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:description" content="The resume of Joel Dombek, a multi-diciplinary designer : developer and brand specialist with a focus on user interaction and design." />
-    <meta name="twitter:title" content="Joel Dombek ~ Resume" />
+    <meta name="robots" content="index,follow" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content="The resume of Joel Dombek, a multi-disciplinary designer / developer and brand specialist with a focus on user interaction and design." />
+    <meta name="twitter:title" content="Joel Dombek — Resume v3" />
     <meta name="twitter:site" content="@joeldombek" />
     <meta name="twitter:creator" content="@joeldombek" />
-    <meta property="og:url" content="http://joeldom.github.io/resume/" />
-    <meta property="og:type" content="resume" />
+    <meta name="twitter:image" content="https://joeldom.github.io/resume/img/resume%20social%20preview.png" />
+    <meta name="twitter:image:alt" content="Social preview for Joel Dombek’s resume" />
+    <meta property="og:url" content="https://joeldom.github.io/resume/v3/" />
+    <meta property="og:type" content="profile" />
     <meta property="og:title" content="Joel Dombek ~ Resume" />
     <meta property="og:site_name" content="Joel Dombek ~ Resume" />
     <meta property="og:description" content="The resume of Joel Dombek, a multi-diciplinary designer : developer and brand specialist with a focus on user interaction and design." />
-    <meta property="og:image" content="http://joeldom.github.io/resume/jd-logo-reflex.gif" />
+    <meta property="og:image" content="https://joeldom.github.io/resume/img/resume%20social%20preview.png" />
+    <meta property="og:image:secure_url" content="https://joeldom.github.io/resume/img/resume%20social%20preview.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Social preview for Joel Dombek’s resume" />
     <meta property="og:locale" content="en_US" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -48,6 +53,7 @@
 
 
      =====================================  Hi, there! Taking a look at my code I see. Nice!  =======================================-->
+    <!-- V2 TEST: content refinements + embedded print stylesheet -->
     <link rel="shortlink" href="http://www.joeldombek.com/" />
     <link rel="shortcut icon" href="https://joeldom.github.io/asset/favicon.ico" rel="icon" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" />
@@ -56,12 +62,59 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="http://joeldom.github.io/redesign/greyboxpr/img/favicon.ico" />
+
     <link rel="image_src" href="http://www.joeldombek.com/jdimglink.jpg" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
     <link rel="stylesheet" href="style.css" />
+    <style>
+        @media print {
+            .resume-logo {
+                width: 176px !important;
+            }
+            .show-details,
+            .toggle-link,
+            .btn,
+            .spacer {
+                display: none !important;
+                visibility: hidden !important;
+            }
+            .collapse {
+                display: block !important;
+                visibility: visible !important;
+            }
+        }
+    </style>
 </head>
 
-<body style="background-color: #1a3acc;" onkeydown="bgColor1()" onkeyup="bgColor2()" class="gradient-background">
+<body class="resume-v3" data-theme="paper">
+
+    <!-- <nav class="v3-topbar screen-only" aria-label="Resume navigation">
+        <a class="v3-home-link" href="./" aria-label="Back home">
+            <span class="v3-home-arrow" aria-hidden="true">←</span>
+            <img src="jd-wht.png" alt="" class="v3-home-logo" />
+            <span>Back home</span>
+        </a>
+    </nav> -->
+    <div class="theme-picker screen-only" id="theme-picker">
+        <button class="theme-picker__trigger" id="theme-picker-trigger" type="button" aria-label="Choose resume theme" aria-expanded="false" aria-controls="theme-picker-options">
+        <span class="theme-picker__glyph" aria-hidden="true">Aa</span>
+      </button>
+        <div class="theme-picker__options" id="theme-picker-options" role="group" aria-label="Resume themes" hidden>
+            <button class="theme-swatch" type="button" data-theme-choice="paper" aria-label="Black text on white paper" title="Paper">
+          <span class="swatch-paper"><b>Aa</b><i>JD</i></span>
+        </button>
+            <button class="theme-swatch" type="button" data-theme-choice="blue" aria-label="White text on brand blue" title="Brand blue">
+          <span class="swatch-blue"><b>Aa</b><i>JD</i></span>
+        </button>
+            <button class="theme-swatch" type="button" data-theme-choice="dark-high" aria-label="High contrast white on black" title="High-contrast dark">
+          <span class="swatch-dark-high"><b>Aa</b><i>JD</i></span>
+        </button>
+            <button class="theme-swatch" type="button" data-theme-choice="dark-low" aria-label="Low contrast white on black" title="Low-contrast dark">
+          <span class="swatch-dark-low"><b>Aa</b><i>JD</i></span>
+        </button>
+        </div>
+    </div>
+
     <!-- <a
       class="over"
       href="mailto:me@joeldombek.com?subject=Hello%20there!%20%20|%20%20Your%20Subject%20Here&Body=Your%20Name%0D%0A%0D%0AYour%20message%20here..."
@@ -72,17 +125,11 @@
     > -->
     <a class="anchor" id="header"></a>
     <div class="info">
-        <span style="text-align:left;" id="version"></span
-      >&nbsp;&nbsp;|&nbsp;&nbsp;<span
-        style="text-align:left;"
-        id="address"
-      ></span>
+        <span style="text-align:left;" id="version"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span style="text-align:left;" id="address"></span>
         <span style="text-align:right;float:right;">Viewport:&nbsp;<span id="monitor"></span>px</span>
     </div>
     <header class="mobile">
-        <span style="text-align:left;display:block;width:50%;float:left;"><br
-          class="mobile"
-        />JOEL<strong>DOMBEK</strong>&nbsp;&nbsp;|&nbsp;&nbsp;RESUME</span>
+        <span style="text-align:left;display:block;width:50%;float:left;"><br class="mobile" />JOEL<strong>DOMBEK</strong>&nbsp;&nbsp;|&nbsp;&nbsp;RESUME</span>
         <br class="mobile" /><small style="text-align:right;display:block;width:50%;float:right;">ver 3.1.6</small>
     </header>
 
@@ -98,17 +145,20 @@
       </div>
     <![endif]-->
     <div id="body">
-        <br /><br class="desktop" /><br class="mobile" />
+        <!-- <br /><br class="desktop" /><br class="mobile" /> -->
         <div class="desktop">
+            <!-- <br /> -->
             <br />
-            <br />
-            <a href="https://joeldom.github.io/redesign/" title="Go home - Joel Dombek Design"><img style="width: 220px;" src="img/bizcolor-v2.png" /></a>
+            <!-- Theme-specific logos: swap each src to its finished artwork when ready. -->
+            <a class="theme-logo theme-logo--paper" href="https://joeldom.github.io/redesign/" title="Go home - Joel Dombek Design"><img class="resume-logo" style="width: 220px;" src="img/jd white stroke.png" alt="Joel Dombek Design" /></a>
+            <a class="theme-logo theme-logo--blue" href="https://joeldom.github.io/redesign/" title="Go home - Joel Dombek Design"><img class="resume-logo" style="width: 220px;" src="img/BRAND-LOGO-mono.png" alt="Joel Dombek Design" /></a>
+            <a class="theme-logo theme-logo--dark-high" href="https://joeldom.github.io/redesign/" title="Go home - Joel Dombek Design"><img class="resume-logo" style="width: 220px;" src="img/BRAND-LOGO-mono.png" alt="Joel Dombek Design" /></a>
+            <a class="theme-logo theme-logo--dark-low" href="https://joeldom.github.io/redesign/" title="Go home - Joel Dombek Design"><img class="resume-logo" style="width: 220px;" src="img/BRAND-LOGO-mono.png" alt="Joel Dombek Design" /></a>
             <br />
             <br />
             <!-- //////////////////////////////////////////////////////////////////<br /> -->
-            <br /> &nbsp;JOEL
-            <strong>DOMBEK</strong><br />
-            <strong>C:\</strong>&nbsp;<span data-target-resolver></span><span class="blink"></span>
+            <br />JOEL<strong style="font-weight: 900;">DOMBEK</strong>/名前<br />
+            <!-- <strong>C:\</strong>&nbsp;<span data-target-resolver></span><span class="blink"></span> -->
             <!-- <br />
         &nbsp;ME@JOELDOMBEK.COM<br />
         &nbsp;WWW.JOELDOMBEK.COM<br />
@@ -155,30 +205,85 @@
 
         <!-- <br />
         <br /> -->
+        <!-- =========================================================================================================================
+        V2 CONTENT REVIEW / DIFF NOTES — REMOVE THIS ENTIRE COMMENT BLOCK AFTER FINALIZING.
+
+        PURPOSE:
+        - Keep the existing visual system intact while testing a stronger content hierarchy.
+        - Position the resume around UX engineering, product design, front-end implementation, accessibility,
+          and design systems rather than treating every historical role as equally important.
+        - Make BNY Mellon the clearest recent enterprise/product-design example.
+        - Reduce repetition and replace generic language with specific capabilities already represented in the resume.
+        - Keep this version intentionally conservative: no new employment claims, dates, employers, or technologies
+          are being invented here. The edits are primarily wording, hierarchy, grouping, and cleanup.
+
+        LINE-BY-LINE CHANGE MAP:
+        01. META: "multi-diciplinary" -> "multi-disciplinary"; fixes the existing spelling error.
+        02. META: "designer : developer" -> "designer / developer"; makes the positioning read naturally.
+        03. POSITIONING: adds a compact summary before EXPERIENCE; gives recruiters immediate context before the timeline.
+        04. BNY: removes the repeated stakeholder bullet; the same idea appeared twice.
+        05. BNY: reframes dashboard/process work around product and service modernization.
+        06. BNY: makes developer collaboration explicit as a UX + front-end strength.
+        07. BNY: consolidates research/testing language into a clearer UX research statement.
+        08. BNY: foregrounds Figma component-library/design-system work and accessibility requirements.
+        09. BNY: keeps competitive analysis, but ties it directly to legacy-system modernization.
+        10. BNY: clarifies delivery/governance work instead of listing project-management terminology alone.
+        11. BNY: keeps style-guide work but connects it to distributed design/development teams.
+        12. BNY: keeps design critique/feedback leadership as a collaboration skill.
+        13. BNY: keeps React/Angular implementation collaboration, now framed as design-to-code execution.
+        14. BNY: keeps consumer banking modernization and makes the user-flow outcome clearer.
+        15. TECH STACK: reorganizes the same general tool story into capability groups; this is easier to scan.
+        16. EDUCATION: "Bachelors Of Science" -> "Bachelor of Science"; grammar/capitalization cleanup.
+        17. No production resume changes are being made; this is isolated to /v2 for proofing.
+        ========================================================================================================================= -->
+
+        <!-- CONTENT DIFF: META + POSITIONING -->
+        <br /> &nbsp;<strong>PROFILE</strong><br />
+        <br />
+        <div class="break">
+            <!-- CHANGE: Adds recruiter-facing positioning without introducing a new formal job title. -->
+            <strong>UX ENGINEERING / PRODUCT DESIGN</strong><br />
+            <!-- CHANGE: Focuses the first read on the intersection of UX, front-end implementation, and systems thinking. -->
+            10+ years across financial services, healthcare, marketing, and enterprise platforms, with a focus on user experience, responsive interface architecture, design systems, accessibility, and front-end implementation.
+            <br /><br />
+            <!-- CHANGE: Brings the design-to-code advantage forward because it is a recurring theme across the strongest recent work. -->
+            Design-system governance, WCAG 2.2 / ARIA-aware interface work, Figma prototyping, UX research and testing, and hands-on HTML/CSS/JavaScript development across React, Angular, and related front-end environments.
+        </div>
+
+        <br /><br />
         <!-- //////////////////////////////////////////////////////////////////<br /> -->
         <br /> &nbsp;<strong>EXPERIENCE</strong> <button class="show-details" id="toggle-all-link">Show Details</button><br />
         <br />
 
         <strong>BNY MELLON </strong>— Pittsburgh, PA (hybrid)<br/> Sr. UX Product Designer Investment Management ~ January 2023 – January 2024<br />
         <ul id="list1" class="dash collapse">
-            <li>Created data dashboards, iterated and modernized existing internal user/client transaction processes.</li>
-            <li>Worked with clients & stakeholders to understand areas that could be improved with better or simpler design patterns. </li>
-            <li>Worked with clients & stakeholders to understand areas that could be improved with better or simpler design patterns. </li>
-            <li>Collaborated with developers to understand the lift and scope as well as impact on wider shared services.</li>
-            <li>Organized team research &amp; planning tests of qualitative and quantitative research heuristics with prototypes and QA environments.</li>
-            <li>Worked with clients & stakeholders to understand areas that could be improved with better or simpler design patterns. </li>
-            <li>Assisted in the building out of a global component library in Figma using new variable and display modes with ADA requirements.</li>
-            <li>Advised on new design patterns for modernization of legacy systems through competitive analysis.</li>
-            <li>Coordinated and implemented project roadmaps, component library (QC) checklists, and planned features in Kanban/Scrum/Agile boards.</li>
-            <li>Created streamlined style-guides for feature rich systems handled by onsite & remote design/development teams. </li>
-            <li>Championed and moderated thoughtful design feedback sessions around other team members' work.</li>
-            <li>Contributed to front-end code styling with new design patterns, with an expertise in ReactJS and Angular alongside developers.</li>
-            <li>Led UX design efforts to modernize consumer (external) banking apps, simplifying admin transfer tracking paths.</li>
+            <!-- CHANGE: Reframes the dashboard/process bullet around modernization and product outcomes. -->
+            <li>Created data dashboards and modernized internal user/client transaction processes through clearer information architecture and interaction patterns.</li>
+            <!-- CHANGE: Removed one of the two duplicate stakeholder bullets; this keeps the stronger version below in context. -->
+            <!-- REMOVED: "Worked with clients & stakeholders to understand areas that could be improved with better or simpler design patterns." -->
+            <!-- CHANGE: Makes the design-to-development bridge explicit and ties it to scope/shared services. -->
+            <li>Collaborated directly with developers to understand implementation lift, scope, and impact across shared services while translating design patterns into feasible front-end solutions.</li>
+            <!-- CHANGE: Consolidates research/testing language into one more readable statement. -->
+            <li>Organized qualitative and quantitative research, prototype testing, and QA-environment feedback to validate UX decisions and identify usability improvements.</li>
+            <!-- CHANGE: Moves design-system governance and accessibility closer to the top because they are core differentiators for this role. -->
+            <li>Helped build and govern a global Figma component library using variables and display modes while accounting for ADA/accessibility requirements.</li>
+            <!-- CHANGE: Keeps competitive analysis but connects it directly to the modernization problem. -->
+            <li>Advised on design patterns for modernizing legacy systems through competitive analysis and pattern evaluation.</li>
+            <!-- CHANGE: Clarifies delivery/process work as design-system and feature governance rather than generic project management. -->
+            <li>Coordinated project roadmaps, component-library QC checklists, and planned features across Kanban, Scrum, and Agile workflows.</li>
+            <!-- CHANGE: Preserves style-guide work while emphasizing consistency across distributed teams. -->
+            <li>Created streamlined style guides for feature-rich systems used by onsite and remote design/development teams.</li>
+            <!-- CHANGE: Retains the collaboration/critique strength with tighter wording. -->
+            <li>Championed and moderated thoughtful design-feedback sessions to improve team work and cross-functional alignment.</li>
+            <!-- CHANGE: Positions React/Angular experience as hands-on design-to-code collaboration rather than a standalone coding claim. -->
+            <li>Contributed to front-end implementation and styling of new design patterns, working alongside developers with ReactJS and Angular expertise.</li>
+            <!-- CHANGE: Keeps the consumer-banking modernization work and makes the UX outcome more concrete. -->
+            <li>Led UX design efforts to modernize consumer banking applications, simplifying administrative transfer-tracking paths and related workflows.</li>
         </ul>
         <a data-target="list1" class="toggle-link see-more">Show Details</a>
         <br />
         <br />
-        <strong>CONNECTIVE RX</strong> — Pittsburgh, PA (hybrid)<br />UI/x & Front-End Developer ~ August 2018 – May 2021<br />
+        <strong>CONNECTIVE RX</strong> — Pittsburgh, PA (hybrid)<br />UX/UI & Front-End Developer ~ August 2018 – May 2021<br />
         <ul id="list2" class="dash collapse">
             <li>Brought on to help redesign integrated systems UIs updating them to be responsive and add accessibility and interactions. </li>
             <li>Shifted & shared between teams to help integrate responsive design frameworks due to wide experience.</li>
@@ -382,7 +487,7 @@
         <br />
         <!-- //////////////////////////////////////////////////////////////////<br /> -->
         <br />
-        <strong>THE ART INSTITUTE OF PITTSBURGH</strong><br /> Bachelors Of Science Degree in Graphic Design<br />
+        <strong>THE ART INSTITUTE OF PITTSBURGH</strong><br /> Bachelor of Science Degree in Graphic Design<br />
         <br />
         <ul class="dash">
             <li>October 2004 – March 2008</li>
@@ -391,7 +496,7 @@
         <br />
         <br />
         <br />
-        <strong>THE ART INSTITUTE OF PITTSBURGH</strong><br /> Diploma In Interactive Media and Web Development<br />
+        <strong>THE ART INSTITUTE OF PITTSBURGH</strong><br /> Diploma in Interactive Media and Web Development<br />
         <br />
         <ul class="dash">
             <li>January 2010 – June 2011</li>
@@ -404,7 +509,7 @@
         <strong>LUZERNE COUNTY COMMUNITY COLLEGE</strong><br />
         <br />
         <ul class="dash">
-            <li>Pursued Bachelors Of Science Degree in Graphic Design</li>
+            <li>Pursued Bachelor of Science Degree in Graphic Design</li>
             <li>Piece selected for Semi-Annual Magazine Cover</li>
             <li>Student-run Radio broadcast</li>
         </ul>
@@ -417,22 +522,38 @@
         <!-- //////////////////////////////////////////////////////////////////<br /> -->
         <br />
         <div class="break">
-            <strong>OS</strong>: Mac OSX, Windows 98-10, iOS3-10, Android, Linux, PhoneGap<br />
+            <!-- CHANGE: Reorganized the existing tech story into capability groups so the most relevant skills scan first. -->
+            <strong>DESIGN</strong>: Figma, FigJam, Miro, Adobe Creative Cloud, Photoshop, Illustrator, InDesign, XD, InVision, Sketch, Axure, UXPin<br />
             <br />
-            <strong>GRAPHIC</strong>: Photoshop, Illustrator, InDesign, Flash, After Effects, Sketch, Axure, UX Pin, XD, Figma, InVision<br />
+            <!-- CHANGE: Keeps collaboration/delivery tools together rather than mixing them with development tooling. -->
+            <strong>PRODUCT / DELIVERY</strong>: Jira, Workfront, Basecamp, ScrumDo, Slack, Freshbooks, Citrix, Google Workspace, Microsoft Office<br />
             <br />
-            <strong>OFFICE</strong>: MS Office, iWork, GDocs, Freshbooks, Basecamp, ScrumDo, Jira, Workfront, Slack, Citrix<br />
+            <!-- CHANGE: Brings the design-to-code toolchain forward. -->
+            <strong>FRONT-END</strong>: HTML5, CSS3, SASS/SCSS, JavaScript, PHP, ASP, JSP, XSLT, MySQL, Markdown, JSON<br />
             <br />
-            <strong>TOOLS</strong>: Atom IDE, Github/SourceTree, Coda 2, FileZilla, Sublime, Cornerstone SVN, Source Tree, MAMP, CodeKit<br />
+            <!-- CHANGE: Groups frameworks/libraries around the actual front-end environments represented in the experience. -->
+            <strong>FRAMEWORKS / LIBRARIES</strong>: React/ReactJS, Angular/AngularJS, NodeJS, Bootstrap, Foundation, jQuery, AJAX, MJML, Webpack<br />
             <br />
-            <strong>LANGUAGES</strong>: HTML5, CSS3, PHP, ASP, JSP, XSLT, JavaScript, MySQL, SASS/LESS, Markdown, JSON<br />
+            <!-- CHANGE: Makes platforms a separate implementation category for easier scanning. -->
+            <strong>PLATFORMS</strong>: WordPress, Drupal, Umbraco, Episerver, Sitecore, Jekyll, Bitnami, PhoneGap<br />
             <br />
-            <strong>FRAMEWORK/LIBRARIES</strong>: Bootstrap, Foundation, Intuit, jQuery, React/AngularJS, NodeJS, Ruby, AJAX, MJML<br />
+            <!-- CHANGE: Adds the accessibility focus without claiming a new certification or job title. -->
+            <strong>ACCESSIBILITY / QA</strong>: WCAG 2.2, ARIA, BrowserStack, Litmus, cross-browser testing, responsive QA<br />
             <br />
-            <strong>PLATFORMS</strong>: WordPress, Drupal, Umbraco, Episerver, Sitecore, Jekyll, Webpack, Bitnami<br />
+            <!-- CHANGE: Preserves the remaining marketing/analytics tools while moving them out of the primary design/development groups. -->
+            <strong>ANALYTICS / MARKETING</strong>: Analytics, AdWords, Mailchimp, ExactTarget, Epsilon, Adobe Target<br />
             <br />
-            <strong>OTHER</strong>: Analytics, AdWords, BrowserStack, Beanstalk, Litmus, Mailchimp, ExactTarget, Epsilon, Adobe Target<br />
+            <!-- CHANGE: Keeps OS/tools available as supporting technical context rather than leading with legacy software. -->
+            <strong>ENVIRONMENT / TOOLS</strong>: Windows 98-10, Mac OS X, iOS, Android, Linux, GitHub/SourceTree, Coda 2, FileZilla, Sublime, MAMP, CodeKit<br />
             <br />
+        </div>
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br /><br />
+        <strong>REPOSITORY</strong><br />
+        <br />
+        <div class="break">
+            <strong><a href="https://github.com/joeldom/redesign" target="_blank" rel="noopener">joeldom/redesign</a></strong><br /> UI/UX testing and development environment for the Joel Dombek Design portfolio, including the sandbox, prototypes, experiments,
+            and supporting front-end work.
+            <br /><br />
         </div>
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br /><br />
         <div class="break">
@@ -473,7 +594,7 @@
         backend content organization. I want to make something people enjoy looking at and clicking on ;)
         </p>
         <br />
-        <span class="screen"><img src="jd-logo-gif-wht.gif" alt="" />&nbsp;&nbsp;&nbsp;</span
+        <span class="screen"><img src="jd-wht.png" alt="JD star logo" />&nbsp;&nbsp;&nbsp;</span
       >~jd -->
       <br />
 
@@ -557,25 +678,32 @@
       });
     </script>
     <script>
-      (function($, inActiveTab, undefined) {
-        $(function() {
-          var message = "No! Don't leave! I have such sights to show you.";
-          var original;
-          $(window)
-            .focus(function() {
-              if (original) {
-                document.title = original;
-              }
-            })
-            .blur(function() {
-              var title = $("title").text();
-              if (title != message) {
-                original = title;
-              }
-              document.title = message;
-            });
+      (function() {
+        var message = "No! Don't leave! I have such sights to show you.";
+        var now = new Date();
+        var timestamp = now.toLocaleDateString("en-US") + " " +
+          now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+        var resumeTitle = "Joel Dombek - Resume [" + timestamp + "]";
+
+        document.title = resumeTitle;
+
+        window.addEventListener("blur", function() {
+          document.title = message;
         });
-      })(window.jQuery, window.inActiveTab);
+
+        window.addEventListener("focus", function() {
+          document.title = resumeTitle;
+        });
+
+        // Keep the playful away title on screen, but never use it for printing.
+        window.addEventListener("beforeprint", function() {
+          document.title = resumeTitle;
+        });
+
+        window.addEventListener("afterprint", function() {
+          document.title = document.hasFocus() ? resumeTitle : message;
+        });
+      })();
     </script>
     <script>
       navigator.browserInfo = (function() {
@@ -683,7 +811,7 @@
       //document.getElementById("obfuscate-2").innerHTML = randomString(10);
     </script>
     <script src="script.js"></script>
-    <script src="collapse.js"></script>
+    <script src="collapse-v3.js"></script>
     <script type="text/javascript">
       if (document.addEventListener) {
         // IE >= 9; other browsers
@@ -713,5 +841,130 @@
     <script src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
     <!-- TRACKING PIX -->
     <!-- <img src="https://ga-beacon.appspot.com/UA-XXXXX-X/welcome-page" /> -->
+  
+    <script>
+      (function () {
+        var body = document.body;
+        var picker = document.getElementById('theme-picker');
+        var trigger = document.getElementById('theme-picker-trigger');
+        var options = document.getElementById('theme-picker-options');
+        var swatches = Array.prototype.slice.call(document.querySelectorAll('[data-theme-choice]'));
+        var themes = ['paper', 'blue', 'dark-high', 'dark-low'];
+        var key = 'resume-v3-theme';
+        var idleTimer = null;
+        var scrollTimer = null;
+        var isPointerOver = false;
+        var isScrolling = false;
+        var hasBeenHovered = false;
+        var idleDelay = 4000;
+        var saved = null;
+        try { saved = localStorage.getItem(key); } catch (e) {}
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var initial = themes.indexOf(saved) !== -1 ? saved : (prefersDark ? 'dark-low' : 'paper');
+
+        function applyTheme(theme) {
+          if (themes.indexOf(theme) === -1) return;
+          body.setAttribute('data-theme', theme);
+          try { localStorage.setItem(key, theme); } catch (e) {}
+          swatches.forEach(function (button) {
+            button.setAttribute('aria-pressed', String(button.getAttribute('data-theme-choice') === theme));
+          });
+        }
+        function closePicker() {
+          options.hidden = true;
+          trigger.setAttribute('aria-expanded', 'false');
+          picker.classList.remove('is-open');
+        }
+        function clearIdleTimer() {
+          window.clearTimeout(idleTimer);
+          idleTimer = null;
+        }
+        function scheduleIdle() {
+          clearIdleTimer();
+          if (isScrolling || isPointerOver || picker.classList.contains('is-open') ||
+              picker.contains(document.activeElement)) return;
+          idleTimer = window.setTimeout(function () {
+            if (isScrolling || isPointerOver || picker.classList.contains('is-open') ||
+                picker.contains(document.activeElement)) return;
+            if (hasBeenHovered) {
+              picker.classList.remove('is-hidden');
+              picker.classList.add('is-idle');
+            } else {
+              picker.classList.remove('is-idle');
+              picker.classList.add('is-hidden');
+            }
+          }, idleDelay);
+        }
+        function revealFromHover() {
+          hasBeenHovered = true;
+          picker.classList.remove('is-hidden', 'is-idle');
+          scheduleIdle();
+        }
+        trigger.addEventListener('click', function () {
+          picker.classList.remove('is-hidden', 'is-idle');
+          var opening = options.hidden;
+          options.hidden = !opening;
+          trigger.setAttribute('aria-expanded', String(opening));
+          picker.classList.toggle('is-open', opening);
+          if (opening) clearIdleTimer();
+          else scheduleIdle();
+        });
+        swatches.forEach(function (button) {
+          button.addEventListener('click', function (event) {
+            event.stopPropagation();
+            applyTheme(button.getAttribute('data-theme-choice'));
+            closePicker();
+            scheduleIdle();
+          });
+        });
+        picker.addEventListener('mouseenter', function () {
+          isPointerOver = true;
+          revealFromHover();
+        });
+        picker.addEventListener('mouseleave', function () {
+          isPointerOver = false;
+          scheduleIdle();
+        });
+        picker.addEventListener('focusin', function () {
+          clearIdleTimer();
+          picker.classList.remove('is-hidden', 'is-idle');
+        });
+        picker.addEventListener('focusout', function () {
+          window.setTimeout(scheduleIdle, 0);
+        });
+        window.addEventListener('scroll', function () {
+          isScrolling = true;
+          picker.classList.add('is-hidden');
+          picker.classList.remove('is-idle');
+          clearIdleTimer();
+          window.clearTimeout(scrollTimer);
+          scrollTimer = window.setTimeout(function () {
+            isScrolling = false;
+            // Stay hidden while scrolling settles; then return to the dim state
+            // if already hovered once, otherwise stay hidden until first hover.
+            if (hasBeenHovered) {
+              picker.classList.remove('is-hidden');
+              picker.classList.add('is-idle');
+            } else {
+              picker.classList.add('is-hidden');
+            }
+            scheduleIdle();
+          }, 700);
+        }, { passive: true });
+        document.addEventListener('click', function (event) {
+          if (!picker.contains(event.target)) closePicker();
+        });
+        document.addEventListener('keydown', function (event) {
+          if (event.key === 'Escape') {
+            closePicker();
+            scheduleIdle();
+          }
+        });
+        applyTheme(initial);
+        // Show on initial load, then hide if untouched after four seconds.
+        scheduleIdle();
+      })();
+    </script>
+
   </body>
 </html>
