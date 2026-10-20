@@ -246,7 +246,11 @@ resolver.resolve(options, callback);
     var address = document.getElementById("address");
     if (!infoBar || !address) return;
 
-    // CHANGE: Insert status details directly after the existing IP field.
+    // CHANGE: Capture when this page instance began; this is elapsed page time,
+    // not a persistent visitor identity or a server-side session.
+    var arrivalTime = Date.now();
+
+    // CHANGE: Insert telemetry directly after the existing IP field.
     var readout = document.createElement("span");
     readout.id = "browser-status-readout";
     readout.setAttribute("aria-label", "Live browser status");
@@ -267,7 +271,32 @@ resolver.resolve(options, callback);
     var scrollAnimation = null;
     var lastTopState = window.scrollY <= 2;
 
-    // CHANGE: Show the source hostname when available, without exposing query strings.
+    // CHANGE: Format clock like a compact system timestamp, including date and
+    // 24-hour time. Uses the visitor's local device clock and timezone.
+    function pad(value, length) {
+        return String(value).padStart(length || 2, "0");
+    }
+
+    function getClockLabel() {
+        var now = new Date();
+        return now.getFullYear() + "-" +
+            pad(now.getMonth() + 1) + "-" +
+            pad(now.getDate()) + " " +
+            pad(now.getHours()) + ":" +
+            pad(now.getMinutes()) + ":" +
+            pad(now.getSeconds());
+    }
+
+    // CHANGE: Elapsed time starts on arrival and is displayed as HH:MM:SS.
+    function getElapsedLabel() {
+        var elapsed = Math.max(0, Math.floor((Date.now() - arrivalTime) / 1000));
+        var hours = Math.floor(elapsed / 3600);
+        var minutes = Math.floor((elapsed % 3600) / 60);
+        var seconds = elapsed % 60;
+        return pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
+    }
+
+    // CHANGE: Show a readable source hostname when available, without query strings.
     function getReferrerLabel() {
         if (!document.referrer) return "direct / hidden";
         try {
@@ -293,10 +322,12 @@ resolver.resolve(options, callback);
     var referrerLabel = getReferrerLabel();
 
     function renderReadout() {
-        // CHANGE: Live viewport-relative mouse coordinates update only on pointer movement.
+        // CHANGE: Clock and elapsed time appear before FPS; FPS is always last.
         readout.textContent =
             " | XY: " + mouseX + "," + mouseY +
             " | FROM: " + referrerLabel +
+            " | TIME: " + getClockLabel() +
+            " | HERE: " + getElapsedLabel() +
             " | FPS: " + fps;
     }
 
@@ -323,7 +354,7 @@ resolver.resolve(options, callback);
         }, 8000);
     }
 
-    // CHANGE: On reaching the very top, count the decorative FPS display from 50 to 60.
+    // CHANGE: When returning to the top, count the decorative FPS from 50 to 60.
     function countUpAtTop() {
         window.clearInterval(fpsTimer);
         window.clearInterval(scrollAnimation);
@@ -348,7 +379,8 @@ resolver.resolve(options, callback);
         lastTopState = atTop;
     }, { passive: true });
 
-    // CHANGE: Keep the status line current when the viewport is resized.
+    // CHANGE: Keep the clock, elapsed timer, and readout live each second.
+    window.setInterval(renderReadout, 1000);
     window.addEventListener("resize", renderReadout, { passive: true });
 
     renderReadout();
