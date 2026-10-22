@@ -1084,6 +1084,7 @@
 }
 .scale-diagnostics__output {
     margin: 0 0 12px;
+    color: #fff !important;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
 }
@@ -1094,7 +1095,7 @@
 }
 .scale-diagnostics__note {
     margin: 10px 0 0;
-    color: #cfcfcf;
+    color: #fff !important;
 }
 @media (max-width: 700px) {
     .scale-diagnostics {
