@@ -209,6 +209,10 @@
     themeNav = document.createElement("nav");
     themeNav.className = "scale-diagnostics__themes";
     themeNav.setAttribute("aria-label", "Resume theme");
+    var themeLabel = document.createElement("span");
+    themeLabel.className = "scale-diagnostics__theme-label";
+    themeLabel.textContent = "/THEME";
+    themeNav.appendChild(themeLabel);
     var themeChoices = [
       ["paper", "Paper"],
       ["blue", "Blue"],
