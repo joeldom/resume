@@ -1040,8 +1040,37 @@
     color: var(--safety-green, #bbff32) !important;
 }
 .resume-v4[data-theme="paper"] #scale-summary,
-.resume-v4 body[data-theme="paper"] #scale-summary {
+body.resume-v4[data-theme="paper"] #scale-summary {
     color: #176b2c !important;
+}
+.scale-diagnostics__themes {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0 0 0 8px;
+    vertical-align: middle;
+}
+.scale-diagnostics__theme {
+    appearance: none;
+    padding: 1px 5px;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    color: var(--theme-ink, inherit);
+    background: transparent;
+    font: inherit;
+    font-size: 10px;
+    line-height: 1.5;
+    cursor: pointer;
+}
+.scale-diagnostics__theme[aria-pressed="true"] {
+    color: var(--theme-bg, #fff);
+    background: var(--theme-ink, #111);
+    border-color: var(--theme-ink, #111);
+    font-weight: 700;
+}
+.scale-diagnostics__theme:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
 }
 .scale-diagnostics {
     position: fixed;
