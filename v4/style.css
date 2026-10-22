@@ -1037,7 +1037,7 @@
     overflow-wrap: anywhere;
 }
 .resume-v4 #scale-summary {
-    color: var(--safety-green, #bbff32);
+    color: #176b2c !important;
 }
 .scale-diagnostics {
     position: fixed;
