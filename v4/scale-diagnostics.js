@@ -30,7 +30,7 @@
     height: html.style.height
   };
   var currentTest = "default";
-  var panel, output, summary, trigger, themeNav;
+  var panel, output, summary, trigger, themeReadout;
 
   function round(value) {
     return typeof value === "number" && isFinite(value) ? Math.round(value * 100) / 100 : "n/a";
@@ -136,22 +136,23 @@
     ].join("\n");
   }
 
-  function updateThemeNav() {
-    if (!themeNav) return;
+  function updateThemeReadout() {
+    if (!themeReadout) return;
     var activeTheme = body && body.getAttribute("data-theme") || "paper";
-    Array.prototype.forEach.call(themeNav.querySelectorAll("[data-v4-theme]"), function (button) {
-      var active = button.getAttribute("data-v4-theme") === activeTheme;
-      button.setAttribute("aria-pressed", String(active));
-      if (active) button.setAttribute("aria-current", "true");
-      else button.removeAttribute("aria-current");
-    });
+    var names = {
+      "paper": "Paper",
+      "blue": "Blue",
+      "dark-high": "Dark High",
+      "dark-low": "Dark Low"
+    };
+    themeReadout.textContent = "/THEME " + (names[activeTheme] || activeTheme);
   }
 
   function update() {
     var data = collect();
     if (summary) summary.textContent = summaryText(data);
     if (output && !panel.hidden) output.textContent = format(data);
-    updateThemeNav();
+    updateThemeReadout();
   }
 
   function applyTest(value, label) {
@@ -205,35 +206,11 @@
     if (existingReadout) existingReadout.insertAdjacentElement("afterend", summary);
     else info.appendChild(summary);
 
-    // Expose the existing four theme choices directly in the top information bar.
-    themeNav = document.createElement("nav");
-    themeNav.className = "scale-diagnostics__themes";
-    themeNav.setAttribute("aria-label", "Resume theme");
-    var themeLabel = document.createElement("span");
-    themeLabel.className = "scale-diagnostics__theme-label";
-    themeLabel.textContent = "/THEME";
-    themeNav.appendChild(themeLabel);
-    var themeChoices = [
-      ["paper", "Paper"],
-      ["blue", "Blue"],
-      ["dark-high", "Dark High"],
-      ["dark-low", "Dark Low"]
-    ];
-    themeChoices.forEach(function (choice) {
-      var button = document.createElement("button");
-      button.type = "button";
-      button.className = "scale-diagnostics__theme";
-      button.textContent = choice[1];
-      button.setAttribute("data-v4-theme", choice[0]);
-      button.addEventListener("click", function () {
-        var existingChoice = document.querySelector('[data-theme-choice="' + choice[0] + '"]');
-        if (existingChoice) existingChoice.click();
-        else if (body) body.setAttribute("data-theme", choice[0]);
-        updateThemeNav();
-      });
-      themeNav.appendChild(button);
-    });
-    info.appendChild(themeNav);
+    // Show the currently selected theme as a read-only label in the information bar.
+    themeReadout = document.createElement("span");
+    themeReadout.className = "scale-diagnostics__theme-readout";
+    themeReadout.setAttribute("aria-label", "Selected resume theme");
+    info.appendChild(themeReadout);
 
     var wrapper = document.createElement("section");
     wrapper.className = "scale-diagnostics";
@@ -303,6 +280,9 @@
     });
 
     window.addEventListener("resize", update, { passive: true });
+    if (body && window.MutationObserver) {
+      new MutationObserver(updateThemeReadout).observe(body, { attributes: true, attributeFilter: ["data-theme"] });
+    }
     window.addEventListener("orientationchange", update, { passive: true });
     if (window.visualViewport) {
       window.visualViewport.addEventListener("resize", update, { passive: true });
