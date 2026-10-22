@@ -65,6 +65,7 @@
     } catch (e) {}
 
     return {
+      theme: (body && body.getAttribute("data-theme")) || "default / not set",
       browser: nav.userAgent || "unavailable",
       platform: (nav.userAgentData && nav.userAgentData.platform) || nav.platform || "unavailable",
       language: nav.language || "unavailable",
@@ -112,6 +113,7 @@
       "RESUME V4 — DIAGNOSTIC REPORT",
       "Captured: " + data.time,
       "",
+      "Theme: " + data.theme,
       "Browser: " + data.browser,
       "Platform: " + data.platform,
       "Locale: " + data.language + " / " + data.languages + " | TZ: " + data.timezone,
@@ -138,7 +140,7 @@
 
   function updateThemeReadout() {
     if (!themeReadout) return;
-    var activeTheme = body && body.getAttribute("data-theme") || "paper";
+    var activeTheme = body && body.getAttribute("data-theme") || "default / not set";
     var names = {
       "paper": "Paper",
       "blue": "Blue",
