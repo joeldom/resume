@@ -30,7 +30,7 @@
     height: html.style.height
   };
   var currentTest = "default";
-  var panel, output, summary, trigger, themeReadout;
+  var panel, output, summary, trigger;
 
   function round(value) {
     return typeof value === "number" && isFinite(value) ? Math.round(value * 100) / 100 : "n/a";
@@ -105,7 +105,8 @@
     return " | SCALE: DPR " + data.dpr +
       " / VV " + (window.visualViewport ? round(window.visualViewport.scale) : "n/a") +
       " / ROOT " + data.rootFont +
-      " / TEST " + data.testScale;
+      " / TEST " + data.testScale +
+      " / THEME " + (data.theme === "default / not set" ? data.theme : ({ "paper": "Paper", "blue": "Blue", "dark-high": "Dark High", "dark-low": "Dark Low" }[data.theme] || data.theme));
   }
 
   function format(data) {
@@ -138,23 +139,11 @@
     ].join("\n");
   }
 
-  function updateThemeReadout() {
-    if (!themeReadout) return;
-    var activeTheme = body && body.getAttribute("data-theme") || "default / not set";
-    var names = {
-      "paper": "Paper",
-      "blue": "Blue",
-      "dark-high": "Dark High",
-      "dark-low": "Dark Low"
-    };
-    themeReadout.textContent = "/THEME " + (names[activeTheme] || activeTheme);
-  }
 
   function update() {
     var data = collect();
     if (summary) summary.textContent = summaryText(data);
     if (output && !panel.hidden) output.textContent = format(data);
-    updateThemeReadout();
   }
 
   function applyTest(value, label) {
@@ -208,11 +197,6 @@
     if (existingReadout) existingReadout.insertAdjacentElement("afterend", summary);
     else info.appendChild(summary);
 
-    // Show the currently selected theme as a read-only label in the information bar.
-    themeReadout = document.createElement("span");
-    themeReadout.className = "scale-diagnostics__theme-readout";
-    themeReadout.setAttribute("aria-label", "Selected resume theme");
-    info.appendChild(themeReadout);
 
     var wrapper = document.createElement("section");
     wrapper.className = "scale-diagnostics";
@@ -283,7 +267,6 @@
 
     window.addEventListener("resize", update, { passive: true });
     if (body && window.MutationObserver) {
-      new MutationObserver(updateThemeReadout).observe(body, { attributes: true, attributeFilter: ["data-theme"] });
     }
     window.addEventListener("orientationchange", update, { passive: true });
     if (window.visualViewport) {
