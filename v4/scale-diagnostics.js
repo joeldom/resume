@@ -3,9 +3,19 @@
  *
  * Purpose:
  * - Report browser-visible measurements when developer tools are unavailable.
- * - Avoid claiming that browser zoom or Windows display scaling can be read
- *   directly; web pages do not have a reliable, universal API for either.
+ * - Browser zoom and OS display scaling cannot be reliably distinguished from
+ *   page JavaScript alone. DPR is evidence, not a definitive OS-scale reading.
  * - Keep automatic scaling OFF. Test scales are temporary and user-triggered.
+ *
+ * Context / history:
+ * - V4 was created to investigate apparent page scaling differences across
+ *   home and work systems, including restricted Linux/Firefox environments
+ *   where developer tools are unavailable.
+ * - The diagnostic UI is intended for internal use: keep visible copy concise
+ *   and matter-of-fact. Put caveats, rationale, and implementation history in
+ *   code comments rather than repeating them in the report itself.
+ * - No third-party diagnostic APIs or automatic telemetry. Report only values
+ *   exposed by the current browser tab; unavailable fields should say so.
  */
 (function () {
   "use strict";
@@ -99,7 +109,7 @@
 
   function format(data) {
     return [
-      "RESUME V4 — SCALE / VIEWPORT REPORT",
+      "RESUME V4 — DIAGNOSTIC REPORT",
       "Captured: " + data.time,
       "",
       "Browser: " + data.browser,
@@ -131,7 +141,7 @@
       "Horizontal overflow: " + data.scrollOverflowX,
       "Vertical overflow: " + data.scrollOverflowY,
       "",
-      "Browser zoom vs. OS scaling: not reliably distinguishable from page data alone."
+
     ].join("\n");
   }
 
