@@ -56,6 +56,19 @@
 
     return {
       browser: nav.userAgent || "unavailable",
+      platform: (nav.userAgentData && nav.userAgentData.platform) || nav.platform || "unavailable",
+      language: nav.language || "unavailable",
+      languages: nav.languages && nav.languages.length ? nav.languages.join(", ") : "unavailable",
+      timezone: (function () { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "unavailable"; } catch (e) { return "unavailable"; } })(),
+      online: typeof nav.onLine === "boolean" ? String(nav.onLine) : "unavailable",
+      cookiesEnabled: typeof nav.cookieEnabled === "boolean" ? String(nav.cookieEnabled) : "unavailable",
+      cookieCount: (function () { try { return document.cookie ? document.cookie.split(";").length : 0; } catch (e) { return "blocked"; } })(),
+      storage: (function () { try { var k = "__diag_test__"; localStorage.setItem(k, "1"); localStorage.removeItem(k); return "available"; } catch (e) { return "blocked/unavailable"; } })(),
+      cores: nav.hardwareConcurrency || "not exposed",
+      memory: nav.deviceMemory ? nav.deviceMemory + " GB (approx.)" : "not exposed",
+      touchPoints: typeof nav.maxTouchPoints === "number" ? nav.maxTouchPoints : "not exposed",
+      connection: (function () { var c = nav.connection || nav.mozConnection || nav.webkitConnection; return c ? [c.effectiveType || "", typeof c.downlink === "number" ? c.downlink + " Mbps" : "", typeof c.rtt === "number" ? c.rtt + " ms RTT estimate" : ""].filter(Boolean).join("; ") || "limited data" : "not exposed"; })(),
+      colorDepth: screenObj.colorDepth ? screenObj.colorDepth + "-bit" : "unavailable",
       dpr: round(window.devicePixelRatio || 1),
       resolution: resolution,
       viewport: (window.innerWidth || de.clientWidth) + " × " + (window.innerHeight || de.clientHeight) + " CSS px",
@@ -89,8 +102,18 @@
       "RESUME V4 — SCALE / VIEWPORT REPORT",
       "Captured: " + data.time,
       "",
-      "DPR (devicePixelRatio): " + data.dpr + "  [clue only; not a Windows-scale reading]",
-      "Resolution media query: " + data.resolution,
+      "Browser: " + data.browser,
+      "Platform: " + data.platform,
+      "Language(s): " + data.language + " / " + data.languages,
+      "Timezone: " + data.timezone,
+      "Online: " + data.online + " | Cookies enabled: " + data.cookiesEnabled + " | Visible cookie count: " + data.cookieCount,
+      "Local storage: " + data.storage,
+      "CPU threads: " + data.cores + " | Memory hint: " + data.memory + " | Touch points: " + data.touchPoints,
+      "Network hint: " + data.connection,
+      "Screen color depth: " + data.colorDepth,
+      "",
+      "DPR (devicePixelRatio): " + data.dpr,
+      "Resolution query: " + data.resolution,
       "Layout viewport: " + data.viewport,
       "Document client box: " + data.client,
       "Full document size: " + data.document,
@@ -108,9 +131,7 @@
       "Horizontal overflow: " + data.scrollOverflowX,
       "Vertical overflow: " + data.scrollOverflowY,
       "",
-      "Browser zoom / Windows display scale: not directly distinguishable by page JavaScript.",
-      "Compare this report at work and at home. DPR can change with OS scaling, browser zoom,",
-      "monitor settings, and browser behavior; treat it as evidence, not a diagnosis."
+      "Browser zoom vs. OS scaling: not reliably distinguishable from page data alone."
     ].join("\n");
   }
 
@@ -135,6 +156,18 @@
       currentTest = label;
     }
     update();
+  }
+
+  function fallbackCopy(value) {
+    var field = document.createElement("textarea");
+    field.value = value;
+    field.setAttribute("readonly", "");
+    field.style.position = "fixed";
+    field.style.left = "-9999px";
+    document.body.appendChild(field);
+    field.select();
+    try { document.execCommand("copy"); } catch (e) {}
+    field.remove();
   }
 
   function makeButton(label, action, title) {
@@ -189,9 +222,29 @@
     controls.appendChild(makeButton("Test 70%", function () { applyTest(0.7, "70%"); }));
     controls.appendChild(makeButton("Refresh report", update));
 
+    controls.appendChild(makeButton("Copy report", function () {
+      var report = format(collect());
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(report).catch(function () { fallbackCopy(report); });
+      } else {
+        fallbackCopy(report);
+      }
+    }));
+    controls.appendChild(makeButton("Download .txt", function () {
+      var blob = new Blob([format(collect())], { type: "text/plain;charset=utf-8" });
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement("a");
+      link.href = url;
+      link.download = "resume-v4-diagnostics.txt";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }));
+
     var note = document.createElement("p");
     note.className = "scale-diagnostics__note";
-    note.textContent = "Scale changes are manual and temporary. Reset before comparing pages. No automatic correction is active.";
+    note.textContent = "Manual scale tests only. Reset before comparing. No automatic correction.";
 
     panel.appendChild(heading);
     panel.appendChild(output);
