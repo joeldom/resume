@@ -200,7 +200,7 @@
     trigger = document.createElement("button");
     trigger.type = "button";
     trigger.className = "scale-diagnostics__trigger";
-    trigger.textContent = "SCALE DATA";
+    trigger.textContent = "DIAGNOSTIC";
     trigger.setAttribute("aria-expanded", "false");
     trigger.setAttribute("aria-controls", "scale-diagnostics-panel");
 
