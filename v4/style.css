@@ -1043,14 +1043,6 @@
 body.resume-v4[data-theme="paper"] #scale-summary {
     color: #176b2c !important;
 }
-.scale-diagnostics__theme-readout {
-    display: inline-block;
-    margin-left: 8px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .04em;
-    vertical-align: middle;
-}
 .scale-diagnostics {
     position: fixed;
     top: 34px;
