@@ -30,7 +30,7 @@
     height: html.style.height
   };
   var currentTest = "default";
-  var panel, output, summary, trigger;
+  var panel, output, summary, trigger, themeNav;
 
   function round(value) {
     return typeof value === "number" && isFinite(value) ? Math.round(value * 100) / 100 : "n/a";
@@ -136,10 +136,22 @@
     ].join("\n");
   }
 
+  function updateThemeNav() {
+    if (!themeNav) return;
+    var activeTheme = body && body.getAttribute("data-theme") || "paper";
+    Array.prototype.forEach.call(themeNav.querySelectorAll("[data-v4-theme]"), function (button) {
+      var active = button.getAttribute("data-v4-theme") === activeTheme;
+      button.setAttribute("aria-pressed", String(active));
+      if (active) button.setAttribute("aria-current", "true");
+      else button.removeAttribute("aria-current");
+    });
+  }
+
   function update() {
     var data = collect();
     if (summary) summary.textContent = summaryText(data);
     if (output && !panel.hidden) output.textContent = format(data);
+    updateThemeNav();
   }
 
   function applyTest(value, label) {
@@ -193,6 +205,32 @@
     if (existingReadout) existingReadout.insertAdjacentElement("afterend", summary);
     else info.appendChild(summary);
 
+    // Expose the existing four theme choices directly in the top information bar.
+    themeNav = document.createElement("nav");
+    themeNav.className = "scale-diagnostics__themes";
+    themeNav.setAttribute("aria-label", "Resume theme");
+    var themeChoices = [
+      ["paper", "Paper"],
+      ["blue", "Blue"],
+      ["dark-high", "Dark High"],
+      ["dark-low", "Dark Low"]
+    ];
+    themeChoices.forEach(function (choice) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "scale-diagnostics__theme";
+      button.textContent = choice[1];
+      button.setAttribute("data-v4-theme", choice[0]);
+      button.addEventListener("click", function () {
+        var existingChoice = document.querySelector('[data-theme-choice="' + choice[0] + '"]');
+        if (existingChoice) existingChoice.click();
+        else if (body) body.setAttribute("data-theme", choice[0]);
+        updateThemeNav();
+      });
+      themeNav.appendChild(button);
+    });
+    info.appendChild(themeNav);
+
     var wrapper = document.createElement("section");
     wrapper.className = "scale-diagnostics";
     wrapper.setAttribute("aria-label", "Scale diagnostics controls");
@@ -221,7 +259,6 @@
     controls.appendChild(makeButton("Test 90%", function () { applyTest(0.9, "90%"); }));
     controls.appendChild(makeButton("Test 80%", function () { applyTest(0.8, "80%"); }));
     controls.appendChild(makeButton("Test 70%", function () { applyTest(0.7, "70%"); }));
-    controls.appendChild(makeButton("Refresh report", update));
 
     controls.appendChild(makeButton("Copy report", function () {
       var report = format(collect());
