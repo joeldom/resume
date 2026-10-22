@@ -1037,6 +1037,10 @@
     overflow-wrap: anywhere;
 }
 .resume-v4 #scale-summary {
+    color: var(--safety-green, #bbff32) !important;
+}
+.resume-v4[data-theme="paper"] #scale-summary,
+.resume-v4 body[data-theme="paper"] #scale-summary {
     color: #176b2c !important;
 }
 .scale-diagnostics {
