@@ -6,7 +6,8 @@ V4 is an isolated diagnostic copy of the root resume release. It is not promoted
 
 - Make browser-visible scale and viewport measurements available without developer tools.
 - Add a compact `SCALE` summary to the existing information bar.
-- Provide a `SCALE DATA` panel with the full report.
+- Provide a `DIAGNOSTIC` panel with the full report.
+- Expose Paper, Blue, Dark High, and Dark Low theme choices in the top information bar.
 - Offer manual 90%, 80%, and 70% CSS zoom tests with a reset control.
 - Keep automatic scaling disabled.
 
@@ -19,8 +20,8 @@ Standard page JavaScript cannot reliably distinguish Windows display scaling fro
 ## Test procedure
 
 1. Open the page at home and at work, ideally with browser zoom reset to 100% using `Ctrl+0`.
-2. Open **SCALE DATA** and compare the reports.
-3. Record the `DPR`, layout viewport, screen size, root/body font sizes, and visual viewport values.
+2. Open **DIAGNOSTIC** and compare the reports.
+3. Record the `DPR`, layout viewport, screen size, root/body font sizes, and visual viewport values. The report updates automatically on load, while open, once per second, and when the viewport changes; no manual refresh button is needed.
 4. Use 90%, 80%, or 70% only as a temporary visual experiment; use **Reset / 100%** before reloading or comparing the baseline.
 5. If the report does not explain the issue, keep the reporting utility and remove the scaling experiment rather than adding automatic corrections.
 
