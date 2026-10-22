@@ -222,10 +222,10 @@
 
     var controls = document.createElement("div");
     controls.className = "scale-diagnostics__controls";
-    controls.appendChild(makeButton("Reset / 100%", function () { applyTest(null); }, "Restore original page styles"));
-    controls.appendChild(makeButton("Test 90%", function () { applyTest(0.9, "90%"); }));
-    controls.appendChild(makeButton("Test 80%", function () { applyTest(0.8, "80%"); }));
-    controls.appendChild(makeButton("Test 70%", function () { applyTest(0.7, "70%"); }));
+    controls.appendChild(makeButton("100%", function () { applyTest(null); }, "Restore original page styles"));
+    controls.appendChild(makeButton("90%", function () { applyTest(0.9, "90%"); }));
+    controls.appendChild(makeButton("80%", function () { applyTest(0.8, "80%"); }));
+    controls.appendChild(makeButton("70%", function () { applyTest(0.7, "70%"); }));
 
     controls.appendChild(makeButton("Copy report", function () {
       var report = format(collect());
